@@ -23,7 +23,7 @@
     { nome: "Guilherme Guimarães", ed: "2ª Batalha", per: "Maio a dezembro de 2022", valor: 10000, img: "segundo.jpg", comp: "segundo_vencedor.jpeg", ig: "https://www.instagram.com/p/CqldhwnuUKh/", perfil: "guiguimaraes" },
     { nome: "Felipe Agnello", ed: "1ª Batalha", per: "Setembro de 2021 a maio de 2022", valor: 10000, img: "primeiro.jpg", comp: "primeiro_vencedor.jpg", ig: "https://www.instagram.com/p/CdWhBUvO-3u/", perfil: "fegnello" },
   ];
-  const BASE = "https://golddenclick.com/vencedoresbat/";
+  const IMG = "img/vencedores/", DOC = "img/comprovantes/";
   const PRICES = {
     novo: [40, 70, 100, 130, 160], antigas: [38, 66, 94, 122, 150], ultima: [36, 62, 88, 114, 140],
     duas: [34, 58, 82, 106, 130], tres: [32, 54, 76, 98, 120], quatro: [30, 50, 70, 90, 110],
@@ -144,17 +144,17 @@
 
   /* ---------- Campeões ---------- */
   $("#champsStrip").innerHTML = CHAMPS.map((c) => `
-    <a class="cs-item" href="#campeoes"><div class="ph"><img src="${BASE + c.img}" alt="${c.nome}" loading="lazy"></div><b>${c.nome}</b><span>${c.ed}</span></a>`).join("");
+    <a class="cs-item" href="#campeoes"><div class="ph"><img src="${IMG + c.img}" alt="${c.nome}" loading="lazy"></div><b>${c.nome}</b><span>${c.ed}</span></a>`).join("");
   $("#hall").innerHTML = CHAMPS.map((c) => `
     <article class="wc">
-      <div class="ph"><img src="${BASE + c.img}" alt="${c.nome}" loading="lazy"></div>
+      <div class="ph"><img src="${IMG + c.img}" alt="${c.nome}" loading="lazy"></div>
       <div class="bd">
         <span class="ed">Vencedor da ${c.ed}</span>
         <h3>${c.nome}</h3>
         <span class="per">${c.per}</span>
         <span class="amt">Faturou ${brl(c.valor)}</span>
         <div class="links">
-          <a class="money" href="${BASE + c.comp}" target="_blank" rel="noopener"><i class="ph ph-receipt"></i> Comprovante</a>
+          <a class="money" href="${DOC + c.comp}" target="_blank" rel="noopener"><i class="ph ph-receipt"></i> Comprovante</a>
           <a href="${c.ig}" target="_blank" rel="noopener"><i class="ph ph-instagram-logo"></i> Instagram</a>
           <a href="https://golddenclick.com/perfil_aberto.php?usuario=${c.perfil}" target="_blank" rel="noopener"><i class="ph ph-user"></i> Perfil</a>
         </div>
