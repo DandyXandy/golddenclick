@@ -90,7 +90,7 @@
     const slots = [];
     state.obras.forEach((o, i) => slots.push(`
       <article class="slot">
-        <div class="ph"><img src="${o.thumb}" alt="${esc(o.titulo)}"></div>
+        <div class="pic"><img src="${o.thumb}" alt="${esc(o.titulo)}"></div>
         <div class="bd">
           <span class="cat">${esc(o.cat)}</span>
           <h3>${esc(o.titulo)}</h3>
@@ -144,10 +144,10 @@
 
   /* ---------- Campeões ---------- */
   $("#champsStrip").innerHTML = CHAMPS.map((c) => `
-    <a class="cs-item" href="#campeoes"><div class="ph"><img src="${IMG + c.img}" alt="${c.nome}" loading="lazy"></div><b>${c.nome}</b><span>${c.ed}</span></a>`).join("");
+    <a class="cs-item" href="#campeoes"><div class="pic"><img src="${IMG + c.img}" alt="${c.nome}" loading="lazy"></div><b>${c.nome}</b><span>${c.ed}</span></a>`).join("");
   $("#hall").innerHTML = CHAMPS.map((c) => `
     <article class="wc">
-      <div class="ph"><img src="${IMG + c.img}" alt="${c.nome}" loading="lazy"></div>
+      <div class="pic"><img src="${IMG + c.img}" alt="${c.nome}" loading="lazy"></div>
       <div class="bd">
         <span class="ed">Vencedor da ${c.ed}</span>
         <h3>${c.nome}</h3>

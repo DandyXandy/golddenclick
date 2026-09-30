@@ -12,7 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@75..125,400..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="gdc.css">
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <link rel="preload" href="vendor/phosphor/regular/Phosphor.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="vendor/phosphor/bold/style.css">
+  <link rel="stylesheet" href="vendor/phosphor/fill/style.css">
   <style>
     /* ----- Barra de login (assinatura do site original) ----- */
     .loginbar { padding: 18px 0 16px; }
@@ -134,8 +137,8 @@
       display: grid; grid-template-columns: .9fr 1.1fr; background: #fff; border-radius: 24px; overflow: hidden;
       box-shadow: var(--shadow); border: 1px solid var(--line);
     }
-    .featured .ph { min-height: 380px; background: var(--bg-3); }
-    .featured .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .featured .pic { min-height: 380px; background: var(--bg-3); }
+    .featured .pic img { width: 100%; height: 100%; object-fit: cover; }
     .featured .info { padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; }
     .featured h3 { font-size: clamp(2rem, 3.6vw, 2.8rem); font-weight: 800; margin: 12px 0 6px; }
     .featured .per { color: var(--muted); }
@@ -153,9 +156,9 @@
     .wgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 14px; }
     .wcard { background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; display: flex; flex-direction: column; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
     .wcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .wcard .ph { aspect-ratio: 1; background: var(--bg-3); overflow: hidden; }
-    .wcard .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-    .wcard:hover .ph img { transform: scale(1.05); }
+    .wcard .pic { aspect-ratio: 1; background: var(--bg-3); overflow: hidden; }
+    .wcard .pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .wcard:hover .pic img { transform: scale(1.05); }
     .wcard .bd { padding: 18px; display: flex; flex-direction: column; gap: 2px; flex: 1; }
     .wcard .ed { font-size: .8rem; font-weight: 600; color: var(--gold-ink); }
     .wcard h3 { font-size: 1.15rem; }
@@ -166,7 +169,7 @@
     .ic { width: 36px; height: 36px; border-radius: var(--r-pill); border: 1px solid var(--line-2); display: grid; place-items: center; text-decoration: none; color: var(--ink-2); transition: all .2s; }
     .ic:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
     .ic.money:hover { background: var(--gold); color: var(--on-gold); border-color: var(--gold-deep); }
-    @media (max-width: 960px) { .wgrid { grid-template-columns: 1fr 1fr; } .featured { grid-template-columns: 1fr; } .featured .ph { min-height: 0; aspect-ratio: 16/11; } }
+    @media (max-width: 960px) { .wgrid { grid-template-columns: 1fr 1fr; } .featured { grid-template-columns: 1fr; } .featured .pic { min-height: 0; aspect-ratio: 16/11; } }
     @media (max-width: 440px) { .wcard .bd { padding: 14px; } .wcard .ft { flex-direction: column; align-items: flex-start; } }
 
     /* ----- Prêmios ----- */
@@ -376,7 +379,7 @@
       </div>
 
       <article class="featured reveal">
-        <div class="ph"><img src="img/vencedores/quinto.jpg" alt="Ewerton Carlos com sua obra vencedora"></div>
+        <div class="pic"><img src="img/vencedores/quinto.jpg" alt="Ewerton Carlos com sua obra vencedora"></div>
         <div class="info">
           <span class="pill-tag" style="align-self:flex-start"><i class="ph-fill ph-crown"></i> Vencedor da 5ª Batalha</span>
           <h3>Ewerton Carlos</h3>
@@ -392,7 +395,7 @@
 
       <div class="wgrid">
         <article class="wcard reveal">
-          <div class="ph"><img src="img/vencedores/quarto.jpg" alt="Jhenivan Aguila" loading="lazy"></div>
+          <div class="pic"><img src="img/vencedores/quarto.jpg" alt="Jhenivan Aguila" loading="lazy"></div>
           <div class="bd">
             <span class="ed">Vencedor da 4ª Batalha</span>
             <h3>Jhenivan Aguila</h3>
@@ -408,7 +411,7 @@
           </div>
         </article>
         <article class="wcard reveal" style="--d:1">
-          <div class="ph"><img src="img/vencedores/terceiro.jpg" alt="Mauro Nunes" loading="lazy"></div>
+          <div class="pic"><img src="img/vencedores/terceiro.jpg" alt="Mauro Nunes" loading="lazy"></div>
           <div class="bd">
             <span class="ed">Vencedor da 3ª Batalha</span>
             <h3>Mauro Nunes</h3>
@@ -424,7 +427,7 @@
           </div>
         </article>
         <article class="wcard reveal" style="--d:2">
-          <div class="ph"><img src="img/vencedores/segundo.jpg" alt="Guilherme Guimarães" loading="lazy"></div>
+          <div class="pic"><img src="img/vencedores/segundo.jpg" alt="Guilherme Guimarães" loading="lazy"></div>
           <div class="bd">
             <span class="ed">Vencedor da 2ª Batalha</span>
             <h3>Guilherme Guimarães</h3>
@@ -440,7 +443,7 @@
           </div>
         </article>
         <article class="wcard reveal" style="--d:3">
-          <div class="ph"><img src="img/vencedores/primeiro.jpg" alt="Felipe Agnello" loading="lazy"></div>
+          <div class="pic"><img src="img/vencedores/primeiro.jpg" alt="Felipe Agnello" loading="lazy"></div>
           <div class="bd">
             <span class="ed">Vencedor da 1ª Batalha</span>
             <h3>Felipe Agnello</h3>
