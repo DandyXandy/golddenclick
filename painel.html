@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Golddenclick | Painel</title>
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" href="logo/logogf.png">
+  <link rel="apple-touch-icon" href="logo/logogf.png">
+  <script src="auth.js"></script>
+  <script>if (!GDC.session()) location.replace("index.html");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@75..125,400..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gdc.css">
+  <link rel="stylesheet" href="painel.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+<body>
+
+<header class="apphead">
+  <div class="wrap apphead-top">
+    <a href="#inicio" aria-label="Golddenclick, início"><img class="logo" src="logo/goldenclick.png" alt="Golddenclick"></a>
+    <div class="head-right">
+      <a href="#perfil" class="saldo" title="Saldo interno"><i class="ph ph-wallet"></i><span>Saldo</span><b class="num" data-bind="saldo">R$ 0,00</b></a>
+      <div class="usermenu">
+        <button class="avatar-btn" id="userBtn" aria-haspopup="menu" aria-expanded="false">
+          <span class="avatar" data-bind="initials">AT</span>
+          <span class="uname" data-bind="nome">Artista</span>
+          <i class="ph ph-caret-down"></i>
+        </button>
+        <div class="menu" id="userMenu" role="menu" hidden>
+          <a href="#perfil" role="menuitem"><i class="ph ph-user"></i> Meu perfil</a>
+          <a href="#obras" role="menuitem"><i class="ph ph-images"></i> Minhas obras</a>
+          <a href="https://wa.me/5511978855684" target="_blank" rel="noopener" role="menuitem"><i class="ph ph-whatsapp-logo"></i> Suporte</a>
+          <button role="menuitem" data-logout><i class="ph ph-sign-out"></i> Sair</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="blackbar appnav" aria-label="Seções">
+    <div class="wrap appnav-inner" id="tabs">
+      <a href="#inicio" data-view="inicio"><i class="ph ph-house"></i>Início</a>
+      <a href="#batalha" data-view="batalha"><i class="ph ph-sword"></i>Próxima Batalha</a>
+      <a href="#obras" data-view="obras"><i class="ph ph-images"></i>Minhas Obras</a>
+      <a href="#votacao" data-view="votacao"><i class="ph ph-check-square-offset"></i>Votação</a>
+      <a href="#rankings" data-view="rankings"><i class="ph ph-ranking"></i>Rankings</a>
+      <a href="#campeoes" data-view="campeoes"><i class="ph ph-crown-simple"></i>Campeões</a>
+      <a href="#regras" data-view="regras"><i class="ph ph-scroll"></i>Regras</a>
+      <a href="#perfil" data-view="perfil"><i class="ph ph-user-circle"></i>Perfil</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap appmain">
+
+  <!-- ================= INÍCIO ================= -->
+  <section class="view" id="v-inicio" data-view="inicio">
+    <div class="greet">
+      <div>
+        <h1>Olá, <span data-bind="first">artista</span>.</h1>
+        <p class="muted">Que a força e a sabedoria estejam com você, guerreiro.</p>
+      </div>
+      <span class="pill-tag"><i class="ph-fill ph-sword"></i> 6ª Batalha: inscrições abertas</span>
+    </div>
+
+    <div class="dash">
+      <div class="card hero-card">
+        <div class="hc-top">
+          <span class="hc-label">6ª Batalha Artística</span>
+          <span class="theme-chip">Tema livre</span>
+        </div>
+        <h2 id="heroTitle">Garanta sua vaga na batalha.</h2>
+        <p id="heroText">Escolha de 1 a 5 obras. O 1º lugar geral leva R$ 20.000.</p>
+        <div class="hc-bottom">
+          <div class="mini-cd" aria-live="polite">
+            <span>Envio até 05/11/2026</span>
+            <div class="countdown"><b data-u="d">--</b>d <b data-u="h">--</b>h <b data-u="m">--</b>m <b data-u="s">--</b>s</div>
+          </div>
+          <a href="#batalha" class="btn btn-gold" id="heroCta">Garantir minha vaga <i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="card stat-card">
+        <span class="sc-label"><i class="ph ph-images"></i> Obras enviadas</span>
+        <b class="sc-value"><span data-bind="enviadas">0</span><small>/<span data-bind="pacote">0</span></small></b>
+        <div class="bar"><i id="obrasBar" style="--p:0"></i></div>
+        <a href="#obras" class="sc-link">Minhas obras <i class="ph ph-arrow-right"></i></a>
+      </div>
+
+      <div class="card stat-card">
+        <span class="sc-label"><i class="ph ph-users-three"></i> Votações como jurado</span>
+        <b class="sc-value" data-bind="grupos">0</b>
+        <p class="sc-note">Uma por obra enviada, em grupos de ~100 obras.</p>
+        <a href="#votacao" class="sc-link">Como votar <i class="ph ph-arrow-right"></i></a>
+      </div>
+
+      <div class="card stat-card gold-tint">
+        <span class="sc-label"><i class="ph ph-seal-check"></i> Batalhas disputadas</span>
+        <b class="sc-value">0</b>
+        <p class="sc-note">Quanto mais você batalha, menor o valor da inscrição.</p>
+        <a href="#batalha" class="sc-link">Ver valores <i class="ph ph-arrow-right"></i></a>
+      </div>
+
+      <div class="card stat-card">
+        <span class="sc-label"><i class="ph ph-wallet"></i> Saldo interno</span>
+        <b class="sc-value num" style="font-family:var(--display)" data-bind="saldo">R$ 0,00</b>
+        <p class="sc-note">Pode ser usado para pagar inscrições.</p>
+        <a href="#batalha" class="sc-link">Usar na inscrição <i class="ph ph-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 class="card-title">Seus próximos passos</h3>
+        <ol class="checklist" id="checklist">
+          <li class="done" data-step="conta"><i class="ph-bold ph-check"></i><div><b>Criar sua conta</b><span>Feito. Bem-vindo à arena.</span></div></li>
+          <li data-step="pacote"><i class="ph-bold ph-ticket"></i><div><b>Escolher o pacote de inscrição</b><span>De 1 a 5 obras, pague por PIX, PayPal ou saldo.</span></div><a href="#batalha" class="btn btn-line btn-sm">Escolher</a></li>
+          <li data-step="obras"><i class="ph-bold ph-upload-simple"></i><div><b>Enviar suas obras</b><span>Até 05/11/2026, 23:59 (Brasília).</span></div><a href="#obras" class="btn btn-line btn-sm">Enviar</a></li>
+          <li data-step="votar"><i class="ph-bold ph-check-square-offset"></i><div><b>Votar na 1ª fase</b><span>Abre depois do encerramento dos envios.</span></div></li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Cronograma da 6ª Batalha</h3>
+        <ol class="timeline">
+          <li class="now"><b>Inscrições e envio de obras</b><span>Até 05/11/2026, 23:59</span></li>
+          <li><b>1ª fase</b><span>Grupos de ~100 obras. Os 10 melhores de cada grupo avançam.</span></li>
+          <li><b>Fases seguintes</b><span>O funil se repete e os pontos se acumulam.</span></li>
+          <li><b>Finalíssima</b><span>As 120 obras de elite.</span></li>
+          <li><b>Resultado e premiação</b><span>Ranking geral, por categoria e de jurados.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card champs-strip">
+      <div class="cs-head">
+        <h3 class="card-title" style="margin:0">Hall dos campeões</h3>
+        <a href="#campeoes" class="sc-link">Ver todos <i class="ph ph-arrow-right"></i></a>
+      </div>
+      <div class="cs-row" id="champsStrip"></div>
+    </div>
+  </section>
+
+  <!-- ================= PRÓXIMA BATALHA ================= -->
+  <section class="view" id="v-batalha" data-view="batalha" hidden>
+    <div class="banner">
+      <div>
+        <span class="hc-label">Próxima Batalha</span>
+        <h1>6ª Batalha Artística</h1>
+        <p>Tema livre. 10 categorias. Tudo online, do envio ao resultado.</p>
+      </div>
+      <div class="banner-facts">
+        <div><b>R$ 20.000</b><span>1º lugar geral</span></div>
+        <div><b>R$ 85.000</b><span>em prêmios</span></div>
+        <div><b>05/11</b><span>fim dos envios</span></div>
+      </div>
+    </div>
+
+    <div id="enrolledBox" class="card enrolled" hidden>
+      <i class="ph-fill ph-seal-check"></i>
+      <div>
+        <h3>Sua vaga está garantida.</h3>
+        <p class="muted" id="enrolledText">Pacote de 0 obras.</p>
+      </div>
+      <a href="#obras" class="btn btn-gold">Enviar obras <i class="ph-bold ph-arrow-right"></i></a>
+    </div>
+
+    <div class="card" id="pricingCard">
+      <h3 class="card-title">Escolha seu pacote</h3>
+      <p class="muted" style="margin-bottom:18px">Quanto mais batalhas você já disputou, menor o valor.</p>
+      <div class="seg" id="seg" role="group" aria-label="Seu histórico">
+        <button aria-pressed="true" data-k="novo">Primeira vez</button>
+        <button aria-pressed="false" data-k="antigas">1 batalha (1ª a 4ª)</button>
+        <button aria-pressed="false" data-k="ultima">1 batalha (a 5ª)</button>
+        <button aria-pressed="false" data-k="duas">2 batalhas</button>
+        <button aria-pressed="false" data-k="tres">3 batalhas</button>
+        <button aria-pressed="false" data-k="quatro">4 ou mais</button>
+      </div>
+      <div class="packs" id="packs"></div>
+      <div class="pay-row">
+        <span><i class="ph ph-qr-code"></i> PIX</span>
+        <span><i class="ph ph-paypal-logo"></i> PayPal</span>
+        <span><i class="ph ph-wallet"></i> Saldo interno</span>
+        <span><i class="ph ph-arrow-counter-clockwise"></i> Estorno em até 7 dias</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 class="card-title">O que você precisa saber</h3>
+        <ul class="facts">
+          <li><i class="ph ph-file-image"></i><span>Arquivo <b>.jpg</b>, mínimo de <b>1.000 px</b> de largura e altura, até <b>10 MB</b>.</span></li>
+          <li><i class="ph ph-hand-palm"></i><span>Proibido usar IA para criar a obra. IA só como referência.</span></li>
+          <li><i class="ph ph-trophy"></i><span>A obra não pode ter sido premiada em outro concurso.</span></li>
+          <li><i class="ph ph-instagram-logo"></i><span>Mantenha seu portfólio público durante o concurso.</span></li>
+          <li><i class="ph ph-lock-simple"></i><span>Depois de enviada, a imagem não pode ser trocada.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Pagamento não confirmou?</h3>
+        <p class="muted">Se o redirecionamento falhar ou demorar, fale com o suporte enviando o comprovante, o e-mail cadastrado e o relato do ocorrido.</p>
+        <a href="https://wa.me/5511978855684" target="_blank" rel="noopener" class="support"><i class="ph ph-whatsapp-logo"></i><span><b>Suporte pelo WhatsApp</b><small>+55 11 97885-5684</small></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MINHAS OBRAS ================= -->
+  <section class="view" id="v-obras" data-view="obras" hidden>
+    <div class="view-head">
+      <div>
+        <h1>Minhas obras</h1>
+        <p class="muted" id="obrasSub">Envie até 05/11/2026, 23:59 (Brasília).</p>
+      </div>
+    </div>
+
+    <div class="card empty" id="obrasEmpty">
+      <div class="empty-ic"><i class="ph ph-ticket"></i></div>
+      <h3>Você ainda não tem uma inscrição</h3>
+      <p class="muted">Escolha um pacote de 1 a 5 obras para liberar o envio.</p>
+      <a href="#batalha" class="btn btn-gold">Escolher pacote <i class="ph-bold ph-arrow-right"></i></a>
+    </div>
+
+    <div class="slots" id="slots" hidden></div>
+  </section>
+
+  <!-- ================= VOTAÇÃO ================= -->
+  <section class="view" id="v-votacao" data-view="votacao" hidden>
+    <div class="view-head">
+      <div>
+        <h1>Votação</h1>
+        <p class="muted">Aqui os próprios artistas são os jurados.</p>
+      </div>
+    </div>
+
+    <div class="card locked">
+      <div class="empty-ic"><i class="ph ph-lock-simple"></i></div>
+      <div>
+        <h3>A votação da 1ª fase abre após o fim dos envios</h3>
+        <p class="muted">Você vai participar de <b data-bind="grupos">0</b> votação(ões), uma para cada obra enviada.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 class="card-title">Como pontuar</h3>
+        <p class="muted" style="margin-bottom:16px">Escolha as 10 melhores obras do seu grupo, menos a sua.</p>
+        <div class="ladder">
+          <div style="--i:0"><span>1ª</span><i style="--w:100%"></i><b>150</b></div>
+          <div style="--i:1"><span>2ª</span><i style="--w:80%"></i><b>120</b></div>
+          <div style="--i:2"><span>3ª</span><i style="--w:66.6%"></i><b>100</b></div>
+          <div style="--i:3"><span>4ª</span><i style="--w:46.6%"></i><b>70</b></div>
+          <div style="--i:4"><span>5ª</span><i style="--w:40%"></i><b>60</b></div>
+          <div style="--i:5"><span>6ª</span><i style="--w:33.3%"></i><b>50</b></div>
+          <div style="--i:6"><span>7ª</span><i style="--w:26.6%"></i><b>40</b></div>
+          <div style="--i:7"><span>8ª</span><i style="--w:20%"></i><b>30</b></div>
+          <div style="--i:8"><span>9ª</span><i style="--w:13.3%"></i><b>20</b></div>
+          <div style="--i:9"><span>10ª</span><i style="--w:6.6%"></i><b>10</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Bônus de jurado</h3>
+        <p class="muted">Quanto mais seu voto se aproxima do resultado final do grupo, mais pontos extras sua obra recebe em cada fase.</p>
+        <div class="bonus">
+          <div><b class="num">300</b><span>pontos mínimos por votação</span></div>
+          <div><b class="num">3.500</b><span>pontos máximos por votação</span></div>
+        </div>
+        <p class="muted" style="margin-top:16px">Mesmo que suas obras não avancem, você continua votando em pelo menos um grupo por fase e disputa o <b style="color:var(--ink)">ranking de jurados</b> até o fim.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RANKINGS ================= -->
+  <section class="view" id="v-rankings" data-view="rankings" hidden>
+    <div class="view-head">
+      <div>
+        <h1>Rankings</h1>
+        <p class="muted">Três classificações, três formas de ganhar.</p>
+      </div>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-rk="geral">Ranking da Batalha</button>
+      <button class="tab" role="tab" aria-selected="false" data-rk="cat">Por categoria</button>
+      <button class="tab" role="tab" aria-selected="false" data-rk="jur">Jurados</button>
+    </div>
+    <div class="card">
+      <div class="rk-grid">
+        <div class="rk-empty">
+          <div class="empty-ic"><i class="ph ph-hourglass-medium"></i></div>
+          <h3 id="rkTitle">Ranking da Batalha</h3>
+          <p class="muted" id="rkText">Todas as categorias disputam juntas. A classificação é publicada ao fim de cada fase.</p>
+        </div>
+        <div class="rk-prizes" id="rkPrizes"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CAMPEÕES ================= -->
+  <section class="view" id="v-campeoes" data-view="campeoes" hidden>
+    <div class="view-head">
+      <div>
+        <h1>Campeões</h1>
+        <p class="muted">Os vencedores das cinco primeiras batalhas.</p>
+      </div>
+    </div>
+    <div class="hall" id="hall"></div>
+  </section>
+
+  <!-- ================= REGRAS ================= -->
+  <section class="view" id="v-regras" data-view="regras" hidden>
+    <div class="view-head">
+      <div>
+        <h1>Termos, Políticas e Regras</h1>
+        <p class="muted">Ao participar, você leu e aceita todos os textos desta página.</p>
+      </div>
+      <a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener" class="btn btn-line btn-sm"><i class="ph ph-arrow-square-out"></i> Texto oficial completo</a>
+    </div>
+
+    <div class="rules">
+      <nav class="rules-nav" aria-label="Documentos">
+        <a href="#r-como" class="on">Como as Batalhas Funcionam</a>
+        <a href="#r-edital">Edital de Inscrição</a>
+        <a href="#r-termos">Termos de Uso</a>
+        <a href="#r-comunidade">Regras da Comunidade</a>
+        <a href="#r-dados">Política de Dados</a>
+      </nav>
+      <div class="rules-body">
+        <details open id="r-como">
+          <summary>Como as Batalhas Funcionam <i class="ph ph-plus"></i></summary>
+          <div class="rb">
+            <p>A Batalha Artística reúne 10 categorias de artes visuais em uma disputa única e democrática: Arte Digital, Arte Urbana/Grafite, Artesanato/Objeto, Colagem, Desenho/Ilustração, Fotografia como Fotógrafo, Fotografia como Modelo, Pintura, Tatuagem e Texto/Lettering.</p>
+            <h4>Justiça e igualdade</h4>
+            <p>Todos começam com zero pontos. Não importa quantas edições você já disputou: cada batalha é um evento isolado.</p>
+            <h4>Fases e votações</h4>
+            <p>As obras são divididas em grupos de cerca de 100. Você participa de uma votação para cada obra enviada e escolhe as 10 melhores do grupo (menos a sua). As 10 mais pontuadas de cada grupo avançam, até restarem as 120 obras de elite. A pontuação final é a soma de todas as fases.</p>
+            <h4>Pontuação extra de jurado</h4>
+            <p>A precisão do seu voto gera pontos extras que são somados à sua obra a cada fase.</p>
+          </div>
+        </details>
+        <details id="r-edital">
+          <summary>Edital de Inscrição (resumo) <i class="ph ph-plus"></i></summary>
+          <div class="rb">
+            <p>Organizado por Golddenclick Assessoria e Serviços Digitais LTDA, CNPJ 42.603.718/0001-12. 6ª Batalha Artística, tema "Livre".</p>
+            <h4>Participação</h4>
+            <p>Aberta a qualquer pessoa. Menores de 18 anos com autorização do responsável legal. Obras feitas à mão ou em qualquer dispositivo digital, sem uso de IA para a criação, e nunca premiadas antes.</p>
+            <h4>Arquivos</h4>
+            <p>.jpg, mínimo de 1.000 px de largura e altura, até 10 MB. A organização pode pedir arquivos originais, RAW ou vídeo do processo para comprovar autoria.</p>
+            <h4>Prazos e reembolso</h4>
+            <p>Envio até 05/11/2026, 23:59 (Brasília). Estorno em até 7 dias após a compra. Sem envio de nenhuma obra, a inscrição é cancelada sem reembolso.</p>
+            <h4>Direitos</h4>
+            <p>Os direitos autorais e comerciais continuam 100% seus. A Golddenclick recebe licença gratuita e não exclusiva para exibir as obras, sempre com crédito.</p>
+            <h4>Selos de patrocinador</h4>
+            <p>Super, Mega, Ultra e Supremo Patrocinador reconhecem sua trajetória. Impacto na nota: zero.</p>
+          </div>
+        </details>
+        <details id="r-termos">
+          <summary>Termos de Uso <i class="ph ph-plus"></i></summary>
+          <div class="rb"><p>O texto integral está disponível na página oficial de Termos, Políticas e Regras.</p></div>
+        </details>
+        <details id="r-comunidade">
+          <summary>Regras da Comunidade <i class="ph ph-plus"></i></summary>
+          <div class="rb"><p>O texto integral está disponível na página oficial de Termos, Políticas e Regras.</p></div>
+        </details>
+        <details id="r-dados">
+          <summary>Política de Dados <i class="ph ph-plus"></i></summary>
+          <div class="rb"><p>O texto integral está disponível na página oficial de Termos, Políticas e Regras.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PERFIL ================= -->
+  <section class="view" id="v-perfil" data-view="perfil" hidden>
+    <div class="profile-top card">
+      <span class="avatar xl" data-bind="initials">AT</span>
+      <div>
+        <h1 data-bind="nome">Artista</h1>
+        <p class="muted">@<span data-bind="usuario">usuario</span></p>
+      </div>
+      <div class="pt-actions">
+        <button class="btn btn-line btn-sm" data-logout><i class="ph ph-sign-out"></i> Sair</button>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <form class="card" id="profileForm" novalidate>
+        <h3 class="card-title">Meus dados</h3>
+        <div class="field"><label for="pfNome">Nome completo</label><input class="input" id="pfNome" autocomplete="name"></div>
+        <div class="field"><label for="pfIg">Instagram</label><input class="input" id="pfIg"></div>
+        <div class="field"><label for="pfEmail">E-mail</label><input class="input" id="pfEmail" type="email" autocomplete="email"></div>
+        <p class="help" style="margin:-4px 0 16px">Mantenha seus dados atualizados: eles são usados nos créditos das suas obras.</p>
+        <button class="btn btn-black" type="submit">Salvar alterações</button>
+      </form>
+
+      <div class="card">
+        <h3 class="card-title">Selos de patrocinador</h3>
+        <p class="muted" style="margin-bottom:18px">Reconhecem a recorrência do seu apoio à plataforma. Não mudam sua nota.</p>
+        <div class="seals">
+          <div><i class="ph-fill ph-medal"></i><b>Super</b></div>
+          <div><i class="ph-fill ph-medal"></i><b>Mega</b></div>
+          <div><i class="ph-fill ph-medal"></i><b>Ultra</b></div>
+          <div><i class="ph-fill ph-crown"></i><b>Supremo</b></div>
+        </div>
+        <p class="help" style="margin-top:14px">Você ainda não tem selos. Eles aparecem conforme sua participação.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="appfoot">
+  <div class="wrap">
+    <span>Golddenclick Assessoria e Serviços Digitais LTDA. CNPJ 42.603.718/0001-12</span>
+    <a href="https://wa.me/5511978855684" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i> Suporte</a>
+  </div>
+</footer>
+
+<!-- Checkout -->
+<dialog class="modal" id="checkout" aria-labelledby="coTitle">
+  <div class="modal-in">
+    <div class="modal-head">
+      <div>
+        <h3 id="coTitle">Finalizar inscrição</h3>
+        <p id="coSummary">6ª Batalha Artística</p>
+      </div>
+      <button type="button" class="x-btn" data-close aria-label="Fechar"><i class="ph ph-x"></i></button>
+    </div>
+    <div class="co-total"><span>Total</span><b id="coPrice">R$ 0</b></div>
+    <fieldset class="methods">
+      <legend>Forma de pagamento</legend>
+      <label><input type="radio" name="pm" value="pix" checked><i class="ph ph-qr-code"></i><span>PIX</span></label>
+      <label><input type="radio" name="pm" value="paypal"><i class="ph ph-paypal-logo"></i><span>PayPal</span></label>
+      <label><input type="radio" name="pm" value="saldo"><i class="ph ph-wallet"></i><span>Saldo interno</span></label>
+    </fieldset>
+    <p class="help" id="pmHelp">O QR Code do PIX é gerado na próxima etapa. Após a confirmação, você vai direto para o envio de obras.</p>
+    <button class="btn btn-gold btn-block" id="payBtn" style="margin-top:18px">Simular pagamento aprovado</button>
+    <p class="help" style="text-align:center;margin-top:10px">Protótipo: nenhum valor é cobrado.</p>
+  </div>
+</dialog>
+
+<!-- Envio de obra -->
+<dialog class="modal wide" id="upload" aria-labelledby="upTitle">
+  <form class="modal-in" id="uploadForm" novalidate>
+    <div class="modal-head">
+      <div>
+        <h3 id="upTitle">Enviar obra</h3>
+        <p>Depois de enviada, a imagem não pode ser trocada. Confira antes.</p>
+      </div>
+      <button type="button" class="x-btn" data-close aria-label="Fechar"><i class="ph ph-x"></i></button>
+    </div>
+
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="image/jpeg" hidden>
+      <div class="drop-empty">
+        <i class="ph ph-upload-simple"></i>
+        <b>Arraste a imagem ou clique para escolher</b>
+        <span>.jpg, mínimo 1.000 × 1.000 px, até 10 MB</span>
+      </div>
+      <img id="dropPreview" alt="" hidden>
+    </label>
+    <p class="err" id="fileErr" style="margin:-6px 0 12px"></p>
+    <p class="help" id="fileInfo" style="margin:-6px 0 12px"></p>
+
+    <fieldset id="meta" disabled>
+      <div class="grid-2">
+        <div class="field">
+          <label for="ob-cat">Categoria <span class="req">*</span></label>
+          <select class="input" id="ob-cat">
+            <option value="">Selecione</option>
+            <option>Arte Digital</option><option>Arte Urbana/Grafite</option><option>Artesanato/Objeto</option><option>Colagem</option><option>Desenho/Ilustração</option><option>Fotografia como Fotógrafo</option><option>Fotografia como Modelo</option><option>Pintura</option><option>Tatuagem</option><option>Texto/Lettering</option>
+          </select>
+          <span class="err">Escolha a categoria.</span>
+        </div>
+        <div class="field">
+          <label for="ob-titulo">Título da obra <span class="req">*</span></label>
+          <input class="input" id="ob-titulo">
+          <span class="err">Dê um título à obra.</span>
+        </div>
+        <div class="field">
+          <label for="ob-ano">Ano de conclusão <span class="req">*</span></label>
+          <input class="input" id="ob-ano" inputmode="numeric" placeholder="2026">
+          <span class="err">Informe o ano.</span>
+        </div>
+        <div class="field">
+          <label for="ob-tam">Tamanho da obra <span class="req">*</span></label>
+          <input class="input" id="ob-tam" placeholder="Ex.: 60 × 80 cm ou 4000 × 3000 px">
+          <span class="err">Informe o tamanho.</span>
+        </div>
+        <div class="field">
+          <label for="ob-tempo">Tempo investido <span class="req">*</span></label>
+          <input class="input" id="ob-tempo" placeholder="Ex.: 40 horas">
+          <span class="err">Informe o tempo investido.</span>
+        </div>
+        <div class="field">
+          <label for="ob-mat">Material utilizado <span class="req">*</span></label>
+          <input class="input" id="ob-mat" placeholder="Ex.: óleo sobre tela">
+          <span class="err">Informe o material.</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="ob-criacao">Criação da obra <span class="req">*</span></label>
+        <input class="input" id="ob-criacao" placeholder="Como foi feita, em poucas palavras">
+        <span class="err">Conte como a obra foi feita.</span>
+      </div>
+      <div class="field">
+        <label for="ob-link">Link da obra <span class="req">*</span></label>
+        <input class="input" id="ob-link" type="url" placeholder="Publicação no Instagram, TikTok ou YouTube">
+        <span class="help">Com detalhes da obra ou do processo de criação.</span>
+        <span class="err">Cole um link do Instagram, TikTok ou YouTube.</span>
+      </div>
+      <div class="field">
+        <label for="ob-desc">Descrição <span class="req">*</span></label>
+        <textarea class="input" id="ob-desc"></textarea>
+        <span class="err">Escreva uma descrição.</span>
+      </div>
+      <div class="field" id="f-decl">
+        <label class="check" style="font-weight:400"><input type="checkbox" id="ob-decl"> <span>Declaro que a obra é de minha autoria, executada sem inteligência artificial e nunca premiada em outro concurso.</span></label>
+        <span class="err">Confirme a declaração de autoria.</span>
+      </div>
+    </fieldset>
+    <button class="btn btn-gold btn-block" type="submit" id="upBtn" disabled>Enviar obra</button>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"><i class="ph-fill ph-check-circle"></i><span></span></div>
+
+<script src="painel.js"></script>
+</body>
+</html>

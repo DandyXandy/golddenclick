@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Golddenclick | Início</title>
+  <meta name="description" content="Golddenclick: concurso online de artes visuais. Participe da 6ª Batalha Artística e dispute R$ 20.000.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" href="logo/logogf.png">
+  <link rel="apple-touch-icon" href="logo/logogf.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@75..125,400..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gdc.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <style>
+    /* ----- Barra de login (assinatura do site original) ----- */
+    .loginbar { padding: 18px 0 16px; }
+    .loginbar form { display: grid; grid-template-columns: auto 1fr auto 1fr auto; gap: 10px 12px; align-items: center; max-width: 820px; margin: 0 auto; }
+    .loginbar label.lb { font-weight: 600; font-size: .9rem; color: #fff; }
+    .loginbar .input { height: 44px; background: #fff; border-color: transparent; }
+    .loginbar .input:focus { border-color: var(--gold); }
+    .loginbar .btn-gold { height: 44px; }
+    .loginbar .sub {
+      grid-column: 1 / -1; display: flex; justify-content: center; align-items: center; gap: 10px 26px; flex-wrap: wrap;
+      font-size: .86rem; color: #cfcfca;
+    }
+    .loginbar .sub a { color: #cfcfca; }
+    .loginbar .sub a:hover { color: var(--gold-2); }
+    .loginbar .check input { accent-color: var(--gold); }
+    .test-hint { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-2); }
+    .test-hint code { font-family: var(--mono); background: rgb(255 255 255 / .08); padding: 2px 8px; border-radius: 6px; color: #fff; }
+    .login-err { grid-column: 1 / -1; text-align: center; color: #ff9b8c; font-size: .88rem; display: none; }
+    .login-err.show { display: block; animation: shake .4s; }
+    @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+    .mobile-login-toggle { display: none; }
+    @media (max-width: 760px) {
+      .loginbar form { grid-template-columns: 1fr; gap: 8px; }
+      .loginbar label.lb { margin-top: 4px; }
+      .loginbar .btn-gold { width: 100%; margin-top: 6px; }
+      .loginbar .sub { justify-content: space-between; }
+      .loginbar.collapsed form { display: none; }
+      .mobile-login-toggle { display: flex; width: 100%; }
+      .loginbar:not(.collapsed) .mobile-login-toggle { display: none; }
+    }
+
+    /* ----- Cabeçalho fixo compacto (aparece ao rolar) ----- */
+    .minihead {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgb(255 255 255 / .9); backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+      border-bottom: 1px solid var(--line);
+      transform: translateY(-100%); transition: transform .4s var(--ease);
+    }
+    .minihead.show { transform: none; }
+    .minihead .wrap { height: 64px; display: flex; align-items: center; gap: 24px; }
+    .minihead img { height: 26px; width: auto; }
+    .minihead nav { display: flex; gap: 22px; margin-left: 12px; }
+    .minihead nav a { text-decoration: none; font-size: .92rem; color: var(--ink-2); }
+    .minihead nav a:hover { color: var(--ink); }
+    .minihead .acts { margin-left: auto; display: flex; gap: 8px; }
+    @media (max-width: 860px) { .minihead nav { display: none; } }
+    @media (max-width: 420px) { .minihead .acts .btn-line { display: none; } }
+
+    /* ----- Boas-vindas ----- */
+    .welcome { padding: 72px 0 40px; text-align: center; position: relative; overflow: hidden; }
+    .welcome::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background:
+        radial-gradient(50% 60% at 50% 0%, rgb(255 210 63 / .28), transparent 70%),
+        linear-gradient(180deg, #fff, var(--bg-2));
+    }
+    .noacc { margin-top: 22px; color: var(--ink-2); font-size: 1rem; }
+    .welcome h1 {
+      font-size: clamp(2.6rem, 6.4vw, 5.2rem); font-weight: 900; font-stretch: 105%;
+      letter-spacing: -.025em; line-height: 1; margin: 18px auto 22px; max-width: 16ch;
+    }
+    .manifesto { display: grid; gap: 4px; justify-items: center; color: var(--ink-2); font-size: 1.12rem; }
+    .manifesto p:first-child { font-family: var(--display); font-size: clamp(1.25rem, 2.4vw, 1.6rem); font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .welcome .ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+
+    .fan { position: relative; height: 330px; margin: 56px auto 0; max-width: 900px; }
+    .fan figure {
+      position: absolute; left: 50%; bottom: 0; margin: 0;
+      width: 210px; aspect-ratio: 1; border-radius: var(--r-card); overflow: hidden;
+      border: 5px solid #fff; box-shadow: var(--shadow-lg); background: var(--bg-3);
+      transform: translateX(calc(-50% + var(--x))) rotate(var(--r)) translateY(var(--y));
+      transition: transform .6s var(--ease);
+    }
+    .fan figure img { width: 100%; height: 100%; object-fit: cover; }
+    .fan figure.main { width: 290px; z-index: 3; }
+    .fan:hover figure { transform: translateX(calc(-50% + var(--x) * 1.12)) rotate(calc(var(--r) * 1.2)) translateY(var(--y)); }
+    .fan figure:nth-child(2), .fan figure:nth-child(4) { z-index: 2; }
+    .fan figcaption { display: none; }
+    @media (max-width: 760px) {
+      .fan { height: 220px; }
+      .fan figure { width: 130px; }
+      .fan figure.main { width: 180px; }
+      .fan figure:nth-child(1), .fan figure:nth-child(5) { display: none; }
+    }
+
+    /* ----- gold / den / click ----- */
+    .gdc { padding: 88px 0; }
+    .gdc-grid { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 14px; align-items: end; margin-top: 36px; }
+    .gdc-card { border-radius: var(--r-card); padding: 28px; min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+    .gdc-card .w { font-family: var(--display); font-weight: 900; font-stretch: 110%; font-size: clamp(3.4rem, 7vw, 6rem); line-height: .85; letter-spacing: -.03em; }
+    .gdc-card p { font-size: 1.02rem; margin-top: 18px; }
+    .gdc-card small { font-family: var(--mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+    .gdc-card.b { background: var(--black); color: #fff; }
+    .gdc-card.b p { color: #cfcfca; }
+    .gdc-card.b p b { color: #fff; }
+    .gdc-card.g { background: linear-gradient(160deg, var(--gold-2), var(--gold) 55%, var(--gold-deep)); color: var(--on-gold); min-height: 300px; }
+    .gdc-card.g p b { font-weight: 700; }
+    @media (max-width: 800px) { .gdc-grid { grid-template-columns: 1fr; } .gdc-card, .gdc-card.g { min-height: 0; } }
+
+    /* ----- Faixa da batalha ----- */
+    .battle { background: var(--black); color: #fff; position: relative; overflow: hidden; }
+    .battle::after { content: "6ª"; position: absolute; right: -10px; bottom: -70px; font-family: var(--display); font-weight: 900; font-size: 20rem; line-height: 1; color: rgb(255 255 255 / .04); pointer-events: none; }
+    .battle .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding-top: 64px; padding-bottom: 64px; }
+    .battle h2 { color: #fff; }
+    .battle h2 span { color: var(--gold-2); }
+    .battle p { color: #bdbdb8; margin-top: 14px; max-width: 46ch; }
+    .cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .cd div { background: var(--black-2); border: 1px solid rgb(255 255 255 / .08); border-radius: 16px; padding: 18px 8px 14px; text-align: center; }
+    .cd b { display: block; font-family: var(--mono); font-weight: 500; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; color: var(--gold-2); }
+    .cd small { font-size: .74rem; color: #9a9a95; text-transform: uppercase; letter-spacing: .1em; }
+    .cd-label { font-size: .88rem; color: #bdbdb8; margin-bottom: 12px; }
+    @media (max-width: 860px) { .battle .wrap { grid-template-columns: 1fr; } }
+
+    /* ----- Vencedores ----- */
+    .winners { padding: 96px 0; background: var(--bg-2); }
+    .sec-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+    .sec-head p { color: var(--muted); margin-top: 12px; }
+    .featured {
+      display: grid; grid-template-columns: .9fr 1.1fr; background: #fff; border-radius: 24px; overflow: hidden;
+      box-shadow: var(--shadow); border: 1px solid var(--line);
+    }
+    .featured .ph { min-height: 380px; background: var(--bg-3); }
+    .featured .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .featured .info { padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; justify-content: center; }
+    .featured h3 { font-size: clamp(2rem, 3.6vw, 2.8rem); font-weight: 800; margin: 12px 0 6px; }
+    .featured .per { color: var(--muted); }
+    .prize-big { font-family: var(--display); font-weight: 900; font-size: clamp(2.4rem, 4.4vw, 3.4rem); line-height: 1; margin-top: 28px; }
+    .prize-big small { font-size: .42em; font-weight: 600; color: var(--muted); margin-right: 6px; }
+    .wlinks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .wlink {
+      display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px;
+      border-radius: var(--r-pill); border: 1px solid var(--line-2); text-decoration: none; font-size: .88rem; font-weight: 500;
+      transition: all .2s;
+    }
+    .wlink:hover { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .wlink.money { background: var(--gold-soft); border-color: #f0d785; color: var(--gold-ink); }
+    .wlink.money:hover { background: var(--gold); color: var(--on-gold); border-color: var(--gold-deep); }
+    .wgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 14px; }
+    .wcard { background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; display: flex; flex-direction: column; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+    .wcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .wcard .ph { aspect-ratio: 1; background: var(--bg-3); overflow: hidden; }
+    .wcard .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .wcard:hover .ph img { transform: scale(1.05); }
+    .wcard .bd { padding: 18px; display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .wcard .ed { font-size: .8rem; font-weight: 600; color: var(--gold-ink); }
+    .wcard h3 { font-size: 1.15rem; }
+    .wcard .per { font-size: .84rem; color: var(--muted); }
+    .wcard .ft { margin-top: auto; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .wcard .amt { font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
+    .icons { display: flex; gap: 6px; }
+    .ic { width: 36px; height: 36px; border-radius: var(--r-pill); border: 1px solid var(--line-2); display: grid; place-items: center; text-decoration: none; color: var(--ink-2); transition: all .2s; }
+    .ic:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .ic.money:hover { background: var(--gold); color: var(--on-gold); border-color: var(--gold-deep); }
+    @media (max-width: 960px) { .wgrid { grid-template-columns: 1fr 1fr; } .featured { grid-template-columns: 1fr; } .featured .ph { min-height: 0; aspect-ratio: 16/11; } }
+    @media (max-width: 440px) { .wcard .bd { padding: 14px; } .wcard .ft { flex-direction: column; align-items: flex-start; } }
+
+    /* ----- Prêmios ----- */
+    .prizes { padding: 104px 0; }
+    .prizes .sec-head h2 { max-width: 20ch; margin: 0 auto; }
+    .ptotal { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .block { border: 1px solid var(--line); border-radius: 24px; padding: clamp(22px, 3.4vw, 40px); background: #fff; box-shadow: var(--shadow); }
+    .block-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+    .block-head h3 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 800; }
+    .block-head p { color: var(--muted); font-size: .92rem; margin-top: 4px; }
+    .total { font-family: var(--mono); font-size: .86rem; padding: 6px 12px; border-radius: var(--r-pill); background: var(--bg-2); border: 1px solid var(--line); white-space: nowrap; }
+
+    .podium { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 12px; align-items: end; }
+    .pod { border-radius: 16px; padding: 18px 18px 20px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
+    .pod .pl { font-weight: 700; font-size: .92rem; display: flex; align-items: center; gap: 6px; }
+    .pod .v { font-family: var(--display); font-weight: 900; font-size: clamp(1.6rem, 3.2vw, 2.6rem); line-height: 1; letter-spacing: -.02em; }
+    .pod .v small { font-size: .45em; font-weight: 600; margin-right: 3px; opacity: .7; }
+    .pod.p1 { min-height: 230px; background: linear-gradient(165deg, var(--gold-2), var(--gold) 55%, var(--gold-deep)); color: var(--on-gold); box-shadow: 0 20px 40px -20px rgb(201 143 0 / .9); }
+    .pod.p1 .v { font-size: clamp(2.2rem, 4.6vw, 3.8rem); }
+    .pod.p2 { min-height: 180px; background: linear-gradient(165deg, #f4f4f2, #dcdcd8); }
+    .pod.p3 { min-height: 150px; background: linear-gradient(165deg, #f7e6d6, #e2b48c); color: #3a2410; }
+    .rest { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 12px; padding: 16px 18px; border-radius: 16px; background: var(--bg-2); }
+    .rest .v { font-family: var(--display); font-weight: 800; font-size: 1.4rem; }
+    .rest .v small { font-size: .6em; color: var(--muted); font-weight: 600; }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chips span { font-family: var(--mono); font-size: .78rem; padding: 4px 10px; border-radius: var(--r-pill); background: #fff; border: 1px solid var(--line-2); color: var(--ink-2); }
+
+    .blocks-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .new-badge { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; background: var(--black); color: var(--gold-2); padding: 4px 10px; border-radius: var(--r-pill); margin-bottom: 10px; }
+    .steps5 { display: grid; gap: 8px; }
+    .steps5 div { display: grid; grid-template-columns: 70px 1fr auto; align-items: center; gap: 12px; }
+    .steps5 .pl { font-weight: 600; font-size: .9rem; }
+    .steps5 i { display: block; height: 30px; border-radius: 10px; width: var(--w); background: linear-gradient(90deg, var(--gold-deep), var(--gold-2)); transform-origin: left; }
+    .steps5 b { font-family: var(--display); font-weight: 800; font-size: 1.1rem; min-width: 76px; text-align: right; }
+    .reveal.in .steps5 i { animation: grow 1s var(--ease) both; animation-delay: calc(var(--i) * 80ms + 150ms); }
+    @keyframes grow { from { transform: scaleX(0); } }
+    .cats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 22px; }
+    .cats span { font-size: .8rem; padding: 5px 11px; border-radius: var(--r-pill); background: var(--bg-2); border: 1px solid var(--line); }
+    .block.dark { background: var(--black); color: #fff; border-color: var(--black); }
+    .block.dark .block-head p { color: #a9a9a4; }
+    .block.dark .total { background: var(--black-2); border-color: rgb(255 255 255 / .1); color: #ddd; }
+    .block.dark .pod.p2 { background: linear-gradient(165deg, #3a3a3d, #26262a); color: #fff; }
+    .block.dark .pod.p3 { background: linear-gradient(165deg, #5a3d24, #3d2816); color: #f3d7bb; }
+    .block.dark .rest { background: var(--black-2); }
+    .block.dark .rest .v small { color: #a9a9a4; }
+    .block.dark .chips span { background: transparent; border-color: rgb(255 255 255 / .16); color: #ddd; }
+    @media (max-width: 900px) { .blocks-2 { grid-template-columns: 1fr; } }
+    @media (max-width: 480px) { .pod { padding: 14px 12px; } .pod .pl { font-size: .8rem; } .pod.p1 { min-height: 190px; } .pod.p2 { min-height: 150px; } .pod.p3 { min-height: 125px; } .steps5 div { grid-template-columns: 56px 1fr auto; } }
+
+    /* ----- CTA final ----- */
+    .final { padding: 0 0 96px; }
+    .final-box {
+      border-radius: 28px; padding: clamp(36px, 6vw, 72px); text-align: center;
+      background: radial-gradient(60% 80% at 50% 0%, rgb(255 210 63 / .35), transparent 70%), var(--black); color: #fff;
+    }
+    .final-box h2 { color: #fff; max-width: 18ch; margin: 0 auto; }
+    .final-box p { color: #bdbdb8; margin: 14px auto 0; max-width: 46ch; }
+    .final-box .ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+
+    /* ----- Rodapé ----- */
+    footer { border-top: 1px solid var(--line); background: var(--bg-2); padding: 48px 0 32px; }
+    .f-top { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .f-top img { height: 30px; width: auto; }
+    .f-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .f-links a { text-decoration: none; color: var(--ink-2); font-size: .92rem; }
+    .f-links a:hover { color: var(--gold-ink); }
+    .f-bottom { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .84rem; color: var(--muted); align-items: center; }
+    .lang { display: inline-flex; align-items: center; gap: 8px; }
+    .lang select { height: 36px; border-radius: var(--r-pill); border: 1px solid var(--line-2); background: #fff; padding: 0 12px; font-size: .86rem; }
+  </style>
+</head>
+<body>
+
+<!-- Cabeçalho compacto (aparece ao rolar) -->
+<div class="minihead" id="minihead" aria-hidden="true">
+  <div class="wrap">
+    <a href="#topo"><img src="logo/goldenclick.png" alt="Golddenclick"></a>
+    <nav>
+      <a href="#vencedores">Vencedores</a>
+      <a href="#premios">Prêmios</a>
+      <a href="#batalha">6ª Batalha</a>
+    </nav>
+    <div class="acts">
+      <a href="#topo" class="btn btn-line btn-sm" data-focus-login>Entrar</a>
+      <a href="cadastro.html" class="btn btn-gold btn-sm">Inscreva-se</a>
+    </div>
+  </div>
+</div>
+
+<header id="topo">
+  <div class="brandband">
+    <div class="wrap brandband-inner">
+      <img class="logo" src="logo/goldenclick.png" alt="Golddenclick" width="1320" height="239">
+    </div>
+  </div>
+
+  <div class="blackbar loginbar collapsed" id="loginbar">
+    <div class="wrap">
+      <button class="btn btn-gold mobile-login-toggle" id="loginToggle"><i class="ph-bold ph-sign-in"></i> Entrar na minha conta</button>
+      <form id="loginForm" novalidate autocomplete="on">
+        <label class="lb" for="lu">Usuário</label>
+        <input class="input" id="lu" name="usuario" autocomplete="username">
+        <label class="lb" for="lp">Senha</label>
+        <div class="input-wrap">
+          <input class="input" id="lp" name="senha" type="password" autocomplete="current-password">
+          <button type="button" class="eye" data-eye="lp" aria-label="Mostrar senha"><i class="ph ph-eye"></i></button>
+        </div>
+        <button class="btn btn-gold" type="submit" id="loginBtn">Entrar</button>
+        <p class="login-err" id="loginErr" role="alert">Usuário ou senha incorretos.</p>
+        <div class="sub">
+          <label class="check"><input type="checkbox" id="lembrar"> Mantenha-me conectado</label>
+          <a href="#" id="forgotLink">Esqueceu a senha?</a>
+          <span class="test-hint"><i class="ph-fill ph-flask"></i> Acesso de teste: <code>teste</code> <code>ouro2026</code></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- BOAS-VINDAS -->
+  <section class="welcome">
+    <div class="wrap">
+      <span class="pill-tag"><i class="ph-fill ph-sword"></i> 6ª Batalha Artística com inscrições abertas</span>
+      <h1>Bem-vindos à Golddenclick!</h1>
+      <div class="manifesto">
+        <p>A arte existe porque só a realidade não é o suficiente.</p>
+        <p>A Golddenclick existe para definir os melhores artistas atualmente.</p>
+        <p>Sabemos que cada pessoa tem um ponto de vista diferente,</p>
+        <p>porque não entra na batalha e mostra o seu pra gente?</p>
+      </div>
+      <p class="noacc">Não tem uma conta ainda?</p>
+      <div class="ctas" style="margin-top:14px">
+        <a href="cadastro.html" class="btn btn-gold">Inscreva-se no Golddenclick <i class="ph-bold ph-arrow-right"></i></a>
+        <a href="#vencedores" class="btn btn-line">Ver os vencedores</a>
+      </div>
+
+      <div class="fan" aria-hidden="true">
+        <figure style="--x:-300px;--r:-12deg;--y:24px"><img src="https://golddenclick.com/vencedoresbat/primeiro.jpg" alt=""></figure>
+        <figure style="--x:-160px;--r:-6deg;--y:6px"><img src="https://golddenclick.com/vencedoresbat/terceiro.jpg" alt=""></figure>
+        <figure class="main" style="--x:0px;--r:0deg;--y:0px"><img src="https://golddenclick.com/vencedoresbat/quinto.jpg" alt=""></figure>
+        <figure style="--x:160px;--r:6deg;--y:6px"><img src="https://golddenclick.com/vencedoresbat/quarto.jpg" alt=""></figure>
+        <figure style="--x:300px;--r:12deg;--y:24px"><img src="https://golddenclick.com/vencedoresbat/segundo.jpg" alt=""></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLD / DEN / CLICK -->
+  <section class="gdc" aria-labelledby="gdcTitle">
+    <div class="wrap">
+      <h2 id="gdcTitle" class="reveal" style="text-align:center">O que significa <span class="hl">Golddenclick</span>?</h2>
+      <div class="gdc-grid">
+        <div class="gdc-card b reveal">
+          <small>gold</small>
+          <div>
+            <div class="w">Gold</div>
+            <p>Crie obras que valem <b>ouro</b>,</p>
+          </div>
+        </div>
+        <div class="gdc-card g reveal" style="--d:1">
+          <small>den / then</small>
+          <div>
+            <div class="w">den</div>
+            <p><b>então</b>,</p>
+          </div>
+        </div>
+        <div class="gdc-card b reveal" style="--d:2">
+          <small>click</small>
+          <div>
+            <div class="w">click</div>
+            <p><b>clique</b> para nos enviar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6ª BATALHA -->
+  <section class="battle" id="batalha">
+    <div class="wrap">
+      <div class="reveal">
+        <h2>A <span>6ª Batalha</span> já começou. Tema livre.</h2>
+        <p>Envie até 5 obras em 10 categorias de artes visuais. Tudo online, do envio ao resultado.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
+          <a href="cadastro.html" class="btn btn-gold">Quero batalhar <i class="ph-bold ph-arrow-right"></i></a>
+          <a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener" class="btn btn-ghost-dark">Como as batalhas funcionam</a>
+        </div>
+      </div>
+      <div class="reveal" style="--d:1" aria-live="polite">
+        <p class="cd-label"><i class="ph-fill ph-hourglass-medium" style="color:var(--gold-2)"></i> Envio de obras até 05/11/2026, 23:59 (Brasília)</p>
+        <div class="cd" id="countdown">
+          <div><b data-u="d">--</b><small>dias</small></div>
+          <div><b data-u="h">--</b><small>horas</small></div>
+          <div><b data-u="m">--</b><small>min</small></div>
+          <div><b data-u="s">--</b><small>seg</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENCEDORES -->
+  <section class="winners" id="vencedores">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Confira nossos cinco vencedores</h2>
+        <p>Artistas reais, prêmios reais. Cada comprovante de pagamento está publicado.</p>
+      </div>
+
+      <article class="featured reveal">
+        <div class="ph"><img src="https://golddenclick.com/vencedoresbat/quinto.jpg" alt="Ewerton Carlos com sua obra vencedora"></div>
+        <div class="info">
+          <span class="pill-tag" style="align-self:flex-start"><i class="ph-fill ph-crown"></i> Vencedor da 5ª Batalha</span>
+          <h3>Ewerton Carlos</h3>
+          <p class="per">Realizada de novembro de 2024 a abril de 2026</p>
+          <div class="prize-big"><small>Faturou</small>R$ 20.000,00</div>
+          <div class="wlinks">
+            <a class="wlink money" href="https://golddenclick.com/vencedoresbat/quinto_vencedor.pdf" target="_blank" rel="noopener"><i class="ph ph-receipt"></i> Ver comprovante</a>
+            <a class="wlink" href="https://www.instagram.com/p/DXfVF7AEW0n/" target="_blank" rel="noopener"><i class="ph ph-instagram-logo"></i> Publicação no Instagram</a>
+            <a class="wlink" href="https://golddenclick.com/perfil_aberto.php?usuario=ewerton" target="_blank" rel="noopener"><i class="ph ph-user"></i> Perfil na Golddenclick</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="wgrid">
+        <article class="wcard reveal">
+          <div class="ph"><img src="https://golddenclick.com/vencedoresbat/quarto.jpg" alt="Jhenivan Aguila" loading="lazy"></div>
+          <div class="bd">
+            <span class="ed">Vencedor da 4ª Batalha</span>
+            <h3>Jhenivan Aguila</h3>
+            <span class="per">Março a dezembro de 2024</span>
+            <div class="ft">
+              <span class="amt">R$ 20.000</span>
+              <div class="icons">
+                <a class="ic money" href="https://golddenclick.com/vencedoresbat/quarto_vencedor.jpg" target="_blank" rel="noopener" aria-label="Comprovante"><i class="ph ph-receipt"></i></a>
+                <a class="ic" href="https://www.instagram.com/p/DEP5F6Lub9o/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="ic" href="https://golddenclick.com/perfil_aberto.php?usuario=jhenivanaguila" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="wcard reveal" style="--d:1">
+          <div class="ph"><img src="https://golddenclick.com/vencedoresbat/terceiro.jpg" alt="Mauro Nunes" loading="lazy"></div>
+          <div class="bd">
+            <span class="ed">Vencedor da 3ª Batalha</span>
+            <h3>Mauro Nunes</h3>
+            <span class="per">Março a dezembro de 2023</span>
+            <div class="ft">
+              <span class="amt">R$ 20.000</span>
+              <div class="icons">
+                <a class="ic money" href="https://golddenclick.com/vencedoresbat/terceiro_vencedor.jpg" target="_blank" rel="noopener" aria-label="Comprovante"><i class="ph ph-receipt"></i></a>
+                <a class="ic" href="https://www.instagram.com/p/C1IS-8lOTRS/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="ic" href="https://golddenclick.com/perfil_aberto.php?usuario=mauronunes" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="wcard reveal" style="--d:2">
+          <div class="ph"><img src="https://golddenclick.com/vencedoresbat/segundo.jpg" alt="Guilherme Guimarães" loading="lazy"></div>
+          <div class="bd">
+            <span class="ed">Vencedor da 2ª Batalha</span>
+            <h3>Guilherme Guimarães</h3>
+            <span class="per">Maio a dezembro de 2022</span>
+            <div class="ft">
+              <span class="amt">R$ 10.000</span>
+              <div class="icons">
+                <a class="ic money" href="https://golddenclick.com/vencedoresbat/segundo_vencedor.jpeg" target="_blank" rel="noopener" aria-label="Comprovante"><i class="ph ph-receipt"></i></a>
+                <a class="ic" href="https://www.instagram.com/p/CqldhwnuUKh/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="ic" href="https://golddenclick.com/perfil_aberto.php?usuario=guiguimaraes" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="wcard reveal" style="--d:3">
+          <div class="ph"><img src="https://golddenclick.com/vencedoresbat/primeiro.jpg" alt="Felipe Agnello" loading="lazy"></div>
+          <div class="bd">
+            <span class="ed">Vencedor da 1ª Batalha</span>
+            <h3>Felipe Agnello</h3>
+            <span class="per">Setembro de 2021 a maio de 2022</span>
+            <div class="ft">
+              <span class="amt">R$ 10.000</span>
+              <div class="icons">
+                <a class="ic money" href="https://golddenclick.com/vencedoresbat/primeiro_vencedor.jpg" target="_blank" rel="noopener" aria-label="Comprovante"><i class="ph ph-receipt"></i></a>
+                <a class="ic" href="https://www.instagram.com/p/CdWhBUvO-3u/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="ic" href="https://golddenclick.com/perfil_aberto.php?usuario=fegnello" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÊMIOS -->
+  <section class="prizes" id="premios">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Venha conquistar a glória eterna vencendo a nossa 6ª Batalha!</h2>
+        <p>Concurso de artes visuais com três rankings premiados.</p>
+        <div class="ptotal"><span class="pill-tag"><i class="ph-fill ph-coins"></i> R$ 85.000 em prêmios no total</span></div>
+      </div>
+
+      <div class="block reveal">
+        <div class="block-head">
+          <div>
+            <h3>Prêmios para os 10 melhores artistas</h3>
+            <p>Todas as categorias juntas.</p>
+          </div>
+          <span class="total">Total R$ 42.000</span>
+        </div>
+        <div class="podium">
+          <div class="pod p2"><span class="pl">2º lugar</span><span class="v"><small>R$</small>10.000</span></div>
+          <div class="pod p1"><span class="pl"><i class="ph-fill ph-crown"></i> 1º lugar</span><span class="v"><small>R$</small>20.000</span></div>
+          <div class="pod p3"><span class="pl">3º lugar</span><span class="v"><small>R$</small>5.000</span></div>
+        </div>
+        <div class="rest">
+          <span class="v">R$ 1.000 <small>para cada um do 4º ao 10º lugar</small></span>
+          <div class="chips"><span>4º</span><span>5º</span><span>6º</span><span>7º</span><span>8º</span><span>9º</span><span>10º</span></div>
+        </div>
+      </div>
+
+      <div class="blocks-2">
+        <div class="block reveal">
+          <span class="new-badge"><i class="ph-fill ph-star-four"></i> Novidade desta edição</span>
+          <div class="block-head">
+            <div>
+              <h3>5 melhores de cada categoria</h3>
+              <p>Categorias separadas. 50 artistas premiados.</p>
+            </div>
+            <span class="total">Total R$ 31.000</span>
+          </div>
+          <div class="steps5">
+            <div style="--i:0"><span class="pl">1º lugar</span><i style="--w:100%"></i><b>R$ 1.000</b></div>
+            <div style="--i:1"><span class="pl">2º lugar</span><i style="--w:80%"></i><b>R$ 800</b></div>
+            <div style="--i:2"><span class="pl">3º lugar</span><i style="--w:60%"></i><b>R$ 600</b></div>
+            <div style="--i:3"><span class="pl">4º lugar</span><i style="--w:40%"></i><b>R$ 400</b></div>
+            <div style="--i:4"><span class="pl">5º lugar</span><i style="--w:30%"></i><b>R$ 300</b></div>
+          </div>
+          <div class="cats">
+            <span>Arte Digital</span><span>Arte Urbana/Grafite</span><span>Artesanato/Objeto</span><span>Colagem</span><span>Desenho/Ilustração</span><span>Fotografia como Fotógrafo</span><span>Fotografia como Modelo</span><span>Pintura</span><span>Tatuagem</span><span>Texto/Lettering</span>
+          </div>
+        </div>
+
+        <div class="block dark reveal" style="--d:1">
+          <div class="block-head">
+            <div>
+              <h3>Os 10 jurados mais sábios também faturam</h3>
+              <p>Premia a precisão do seu voto, mesmo que sua obra não avance.</p>
+            </div>
+            <span class="total">Total R$ 12.000</span>
+          </div>
+          <div class="podium">
+            <div class="pod p2"><span class="pl">2º</span><span class="v"><small>R$</small>2.500</span></div>
+            <div class="pod p1"><span class="pl"><i class="ph-fill ph-scales"></i> 1º</span><span class="v"><small>R$</small>5.000</span></div>
+            <div class="pod p3"><span class="pl">3º</span><span class="v"><small>R$</small>1.000</span></div>
+          </div>
+          <div class="rest">
+            <span class="v">R$ 500 <small>do 4º ao 10º</small></span>
+            <div class="chips"><span>4º</span><span>5º</span><span>6º</span><span>7º</span><span>8º</span><span>9º</span><span>10º</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="final">
+    <div class="wrap">
+      <div class="final-box reveal">
+        <h2>Crie obras que valem ouro. Então, clique.</h2>
+        <p>Crie sua conta em menos de dois minutos e garanta sua vaga na 6ª Batalha.</p>
+        <div class="ctas">
+          <a href="cadastro.html" class="btn btn-gold">Inscreva-se no Golddenclick <i class="ph-bold ph-arrow-right"></i></a>
+          <a href="#topo" class="btn btn-ghost-dark" data-focus-login>Já tenho conta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <img src="logo/goldenclick.png" alt="Golddenclick">
+      <nav class="f-links" aria-label="Rodapé">
+        <a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Termos, Políticas e Regras</a>
+        <a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Edital de inscrição</a>
+        <a href="https://wa.me/5511978855684" target="_blank" rel="noopener">Suporte no WhatsApp</a>
+      </nav>
+    </div>
+    <div class="f-bottom">
+      <span>Golddenclick Assessoria e Serviços Digitais LTDA. CNPJ 42.603.718/0001-12</span>
+      <label class="lang"><i class="ph ph-translate"></i> Language
+        <select aria-label="Idioma"><option>Portuguese</option><option>English</option></select>
+      </label>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="region" aria-label="Aviso de cookies">
+  <span>A Golddenclick utiliza cookies essenciais para garantir sua segurança e login. Ao navegar, você concorda com nossos <a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Termos, Políticas e Regras</a>.</span>
+  <button class="btn btn-gold btn-sm" id="cookieOk">Entendi</button>
+</div>
+
+<!-- Recuperar senha -->
+<dialog class="modal" id="forgot" aria-labelledby="fgTitle">
+  <form class="modal-in" id="forgotForm" novalidate>
+    <div class="modal-head">
+      <div>
+        <h3 id="fgTitle">Recuperar senha</h3>
+        <p>Enviaremos um link para o e-mail cadastrado.</p>
+      </div>
+      <button type="button" class="x-btn" data-close aria-label="Fechar"><i class="ph ph-x"></i></button>
+    </div>
+    <div class="field">
+      <label for="fgEmail">E-mail</label>
+      <input class="input" id="fgEmail" type="email" autocomplete="email" placeholder="voce@email.com">
+      <span class="err">Informe um e-mail válido.</span>
+    </div>
+    <button class="btn btn-black btn-block" type="submit">Enviar link</button>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"><i class="ph-fill ph-check-circle"></i><span></span></div>
+
+<script src="auth.js"></script>
+<script>
+(() => {
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const toast = (msg) => { const t = $("#toast"); $("span", t).textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 2600); };
+
+  // Já logado? vai direto ao painel
+  if (GDC.session()) location.replace("painel.html");
+
+  // Cabeçalho compacto aparece ao passar da barra de login
+  const mini = $("#minihead");
+  new IntersectionObserver(([e]) => {
+    const show = !e.isIntersecting;
+    mini.classList.toggle("show", show);
+    mini.setAttribute("aria-hidden", String(!show));
+  }).observe($("#loginbar"));
+
+  // Barra de login: no celular abre sob demanda
+  const bar = $("#loginbar");
+  const openLogin = () => { bar.classList.remove("collapsed"); setTimeout(() => $("#lu").focus(), 50); };
+  $("#loginToggle").addEventListener("click", openLogin);
+  $$("[data-focus-login]").forEach((a) => a.addEventListener("click", (e) => {
+    e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); setTimeout(openLogin, 350);
+  }));
+
+  // Login
+  $("#loginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const err = $("#loginErr");
+    err.classList.remove("show");
+    const u = $("#lu").value, p = $("#lp").value;
+    if (!u.trim() || !p) { err.textContent = "Preencha usuário e senha."; void err.offsetWidth; err.classList.add("show"); return; }
+    const btn = $("#loginBtn");
+    btn.innerHTML = '<i class="ph ph-circle-notch spin"></i>';
+    btn.disabled = true;
+    setTimeout(() => {
+      if (GDC.login(u, p, $("#lembrar").checked)) {
+        btn.innerHTML = '<i class="ph-bold ph-check"></i>';
+        location.href = "painel.html";
+      } else {
+        btn.textContent = "Entrar"; btn.disabled = false;
+        err.textContent = "Usuário ou senha incorretos."; void err.offsetWidth; err.classList.add("show");
+      }
+    }, 600);
+  });
+
+  // Mostrar senha
+  $$("[data-eye]").forEach((b) => b.addEventListener("click", () => {
+    const inp = document.getElementById(b.dataset.eye);
+    const show = inp.type === "password";
+    inp.type = show ? "text" : "password";
+    b.innerHTML = `<i class="ph ph-eye${show ? "-slash" : ""}"></i>`;
+  }));
+
+  // Recuperar senha
+  const fg = $("#forgot");
+  $("#forgotLink").addEventListener("click", (e) => { e.preventDefault(); fg.showModal(); });
+  $$("[data-close]", fg).forEach((b) => b.addEventListener("click", () => fg.close()));
+  fg.addEventListener("click", (e) => { if (e.target === fg) fg.close(); });
+  $("#forgotForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = $(".field", e.target);
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#fgEmail").value.trim());
+    f.classList.toggle("error", !ok);
+    if (ok) { fg.close(); toast("Se o e-mail estiver cadastrado, você receberá o link."); }
+  });
+
+  // Contagem regressiva (prazo oficial do edital)
+  const end = new Date("2026-11-05T23:59:00-03:00").getTime();
+  const pad = (n) => String(n).padStart(2, "0");
+  const tick = () => {
+    const d = Math.max(0, end - Date.now());
+    $("[data-u=d]").textContent = pad(Math.floor(d / 864e5));
+    $("[data-u=h]").textContent = pad(Math.floor(d / 36e5) % 24);
+    $("[data-u=m]").textContent = pad(Math.floor(d / 6e4) % 60);
+    $("[data-u=s]").textContent = pad(Math.floor(d / 1e3) % 60);
+  };
+  tick(); setInterval(tick, 1000);
+
+  // Reveal
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  $$(".reveal").forEach((el) => io.observe(el));
+
+  // Cookie
+  const ck = $("#cookie");
+  if (!GDC.store.get("gdc-cookie")) setTimeout(() => ck.classList.add("show"), 1000);
+  $("#cookieOk").addEventListener("click", () => { ck.classList.remove("show"); GDC.store.set("gdc-cookie", 1); });
+})();
+</script>
+</body>
+</html>

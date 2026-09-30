@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Golddenclick | 6ª Batalha Artística</title>
+  <meta name="description" content="Concurso online de artes visuais onde os próprios artistas são os jurados. R$ 85 mil em prêmios na 6ª Batalha Artística.">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta property="og:title" content="Golddenclick | 6ª Batalha Artística">
+  <meta property="og:description" content="Crie obras que valem ouro. Inscrições até 05 de novembro de 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#topo" class="wordmark" aria-label="Golddenclick, início">Gold<span>den</span>click</a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#premios">Prêmios</a>
+      <a href="#campeoes">Campeões</a>
+      <a href="#inscricao">Inscrição</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="link-btn" data-open-login>Entrar</button>
+      <a href="cadastro.html" class="btn btn-gold btn-sm">Quero batalhar <i class="ph-bold ph-arrow-right"></i></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu"><i class="ph ph-list"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="top">
+    <span class="wordmark">Gold<span>den</span>click</span>
+    <button class="menu-btn" style="display:inline-grid" id="menuClose" aria-label="Fechar menu"><i class="ph ph-x"></i></button>
+  </div>
+  <nav>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#premios">Prêmios</a>
+    <a href="#campeoes">Campeões</a>
+    <a href="#inscricao">Inscrição</a>
+    <a href="#duvidas">Dúvidas</a>
+  </nav>
+  <div class="ctas">
+    <a href="cadastro.html" class="btn btn-gold">Quero batalhar <i class="ph-bold ph-arrow-right"></i></a>
+    <button class="btn btn-ghost" data-open-login>Entrar</button>
+  </div>
+</div>
+
+<main id="topo">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-in">
+        <span class="eyebrow"><i class="ph-fill ph-sword"></i> 6ª Batalha Artística aberta</span>
+        <h1>Crie obras que valem <em>ouro.</em></h1>
+        <p class="lead">Concurso online de artes visuais onde os próprios artistas são os jurados. O 1º lugar leva R$ 20.000.</p>
+        <div class="hero-ctas">
+          <a href="cadastro.html" class="btn btn-gold">Quero batalhar <i class="ph-bold ph-arrow-right"></i></a>
+          <a href="#como-funciona" class="btn btn-ghost">Como funciona</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-thumb"><img src="https://golddenclick.com/vencedoresbat/quarto.jpg" alt="Jhenivan Aguila, campeão da 4ª Batalha"></div>
+        <div class="hero-photo">
+          <img src="https://golddenclick.com/vencedoresbat/quinto.jpg" alt="Ewerton Carlos ao lado de sua obra vencedora" fetchpriority="high">
+        </div>
+        <div class="countdown" aria-live="polite">
+          <div class="countdown-label"><span class="live-dot"></span> Envio de obras encerra em</div>
+          <div class="countdown-units" id="countdown">
+            <div><b data-u="d">--</b><small>dias</small></div>
+            <div><b data-u="h">--</b><small>horas</small></div>
+            <div><b data-u="m">--</b><small>min</small></div>
+            <div><b data-u="s">--</b><small>seg</small></div>
+          </div>
+        </div>
+        <p class="hero-caption"><strong>Ewerton Carlos</strong>, campeão da 5ª Batalha</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NÚMEROS -->
+  <section class="stats" aria-label="Golddenclick em números">
+    <div class="wrap stats-grid">
+      <div class="stat reveal"><b class="num">5</b><span>batalhas realizadas desde 2021</span></div>
+      <div class="stat reveal" style="--d:1"><b>R$ 80 mil</b><span>pagos aos cinco campeões</span></div>
+      <div class="stat reveal" style="--d:2"><b class="num">10</b><span>categorias de artes visuais</span></div>
+      <div class="stat reveal" style="--d:3"><b class="gold">R$ 85 mil</b><span>em prêmios na 6ª Batalha</span></div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="section" aria-label="Manifesto">
+    <div class="wrap">
+      <div class="manifesto-lines reveal">
+        <p class="on">A arte existe porque só a realidade não é o suficiente.</p>
+        <p style="margin-top:18px">A Golddenclick existe para definir os melhores artistas atualmente. Cada pessoa tem um ponto de vista diferente. <span style="color:var(--text)">Por que não entra na batalha e mostra o seu pra gente?</span></p>
+      </div>
+
+      <div class="etym">
+        <div class="reveal">
+          <div class="word">Gold</div>
+          <p class="meaning">Crie obras que valem <b>ouro</b>,</p>
+        </div>
+        <div class="den reveal" style="--d:1">
+          <div class="word">den</div>
+          <p class="meaning"><b>então</b> (then),</p>
+        </div>
+        <div class="reveal" style="--d:2">
+          <div class="word">click</div>
+          <p class="meaning"><b>clique</b> para nos enviar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÊMIOS -->
+  <section class="section" id="premios" style="padding-top:40px">
+    <div class="wrap">
+      <div class="prizes-head reveal">
+        <h2>R$ 85 mil em prêmios.<br>Três jeitos de ganhar.</h2>
+        <div class="tabs" role="tablist" aria-label="Tipos de premiação">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="p-geral" id="t-geral">Ranking geral</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p-cat" id="t-cat">Por categoria</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p-jur" id="t-jur">Melhores jurados</button>
+        </div>
+      </div>
+
+      <!-- geral -->
+      <div class="panel" id="p-geral" role="tabpanel" aria-labelledby="t-geral">
+        <div class="bento">
+          <div class="tile tile-first">
+            <span class="place"><i class="ph-fill ph-crown"></i> 1º lugar geral</span>
+            <div>
+              <div class="amount"><small>R$</small>20.000</div>
+              <p class="note">A obra mais pontuada entre todas as categorias.</p>
+            </div>
+            <i class="ph-fill ph-trophy trophy" aria-hidden="true"></i>
+          </div>
+          <div class="tile tile-silver">
+            <span class="place">2º lugar</span>
+            <div class="amount"><small>R$</small>10.000</div>
+          </div>
+          <div class="tile tile-bronze">
+            <span class="place">3º lugar</span>
+            <div class="amount"><small>R$</small>5.000</div>
+          </div>
+          <div class="tile tile-wide">
+            <span class="place">Do 4º ao 10º lugar</span>
+            <div class="row">
+              <div class="amount"><small>R$</small>1.000 <small style="margin-left:6px">cada</small></div>
+              <div class="ranks"><span>4º</span><span>5º</span><span>6º</span><span>7º</span><span>8º</span><span>9º</span><span>10º</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="prize-foot"><i class="ph ph-info"></i> Todas as categorias disputam juntas. Total do ranking geral: R$ 42.000.</p>
+      </div>
+
+      <!-- categoria -->
+      <div class="panel" id="p-cat" role="tabpanel" aria-labelledby="t-cat" hidden>
+        <div class="bento">
+          <div class="tile tile-first">
+            <span class="place"><i class="ph-fill ph-star-four"></i> Novidade da 6ª Batalha</span>
+            <div>
+              <div class="amount"><small>R$</small>1.000</div>
+              <p class="note">Para o 1º lugar de cada uma das 10 categorias. São 50 artistas premiados.</p>
+            </div>
+            <i class="ph-fill ph-medal trophy" aria-hidden="true"></i>
+          </div>
+          <div class="tile tile-silver">
+            <span class="place">2º da categoria</span>
+            <div class="amount"><small>R$</small>800</div>
+          </div>
+          <div class="tile tile-bronze">
+            <span class="place">3º da categoria</span>
+            <div class="amount"><small>R$</small>600</div>
+          </div>
+          <div class="tile tile-wide">
+            <span class="place">4º e 5º da categoria</span>
+            <div class="row">
+              <div class="amount"><small>R$</small>400 <small style="margin-left:4px">e</small> <small>R$</small>300</div>
+            </div>
+            <div class="cat-list">
+              <span>Arte Digital</span><span>Arte Urbana/Grafite</span><span>Artesanato/Objeto</span><span>Colagem</span><span>Desenho/Ilustração</span><span>Fotografia (Fotógrafo)</span><span>Fotografia (Modelo)</span><span>Pintura</span><span>Tatuagem</span><span>Texto/Lettering</span>
+            </div>
+          </div>
+        </div>
+        <p class="prize-foot"><i class="ph ph-info"></i> Seja reconhecido como autoridade na sua técnica. Total por categorias: R$ 31.000.</p>
+      </div>
+
+      <!-- jurados -->
+      <div class="panel" id="p-jur" role="tabpanel" aria-labelledby="t-jur" hidden>
+        <div class="bento">
+          <div class="tile tile-first">
+            <span class="place"><i class="ph-fill ph-scales"></i> Jurado mais sábio</span>
+            <div>
+              <div class="amount"><small>R$</small>5.000</div>
+              <p class="note">Premia a precisão do seu voto, mesmo que sua obra não avance de fase.</p>
+            </div>
+            <i class="ph-fill ph-gavel trophy" aria-hidden="true"></i>
+          </div>
+          <div class="tile tile-silver">
+            <span class="place">2º jurado</span>
+            <div class="amount"><small>R$</small>2.500</div>
+          </div>
+          <div class="tile tile-bronze">
+            <span class="place">3º jurado</span>
+            <div class="amount"><small>R$</small>1.000</div>
+          </div>
+          <div class="tile tile-wide">
+            <span class="place">Do 4º ao 10º jurado</span>
+            <div class="row">
+              <div class="amount"><small>R$</small>500 <small style="margin-left:6px">cada</small></div>
+              <div class="ranks"><span>4º</span><span>5º</span><span>6º</span><span>7º</span><span>8º</span><span>9º</span><span>10º</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="prize-foot"><i class="ph ph-info"></i> Cada votação vale de 300 a 3.500 pontos de jurado. Total para jurados: R$ 12.000.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section how" id="como-funciona">
+    <div class="wrap how-grid">
+      <div class="how-side reveal">
+        <h2>Artistas julgam artistas.</h2>
+        <p class="lead">Tudo acontece dentro do site, do envio ao resultado. Todo mundo começa com zero pontos, inclusive quem já venceu.</p>
+        <a href="#duvidas" class="btn btn-ghost">Ler o edital completo <i class="ph ph-file-text"></i></a>
+      </div>
+
+      <div class="steps">
+        <article class="step reveal">
+          <div class="step-icon"><i class="ph ph-upload-simple"></i></div>
+          <div>
+            <h3>Envie até 5 obras</h3>
+            <p>Escolha a categoria de cada obra. Arquivo <b>.jpg</b> com no mínimo 1.000 px e até 10 MB. Prazo: <b>05/11/2026, 23:59</b> (Brasília).</p>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <div class="step-icon"><i class="ph ph-users-three"></i></div>
+          <div>
+            <h3>Entre em grupos de ~100 obras</h3>
+            <p>Cada obra enviada coloca você em uma votação. Enviou 5 obras? Você é jurado em <b>5 grupos diferentes</b>.</p>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <div class="step-icon"><i class="ph ph-ranking"></i></div>
+          <div>
+            <h3>Vote nas 10 melhores</h3>
+            <p>Você escolhe as 10 melhores do seu grupo, menos a sua. Os pontos por posição:</p>
+            <div class="ladder" aria-label="Pontuação por posição">
+              <div style="--i:0"><span>1ª</span><i style="--w:100%"></i><b>150</b></div>
+              <div style="--i:1"><span>2ª</span><i style="--w:80%"></i><b>120</b></div>
+              <div style="--i:2"><span>3ª</span><i style="--w:66.6%"></i><b>100</b></div>
+              <div style="--i:3"><span>4ª</span><i style="--w:46.6%"></i><b>70</b></div>
+              <div style="--i:4"><span>5ª</span><i style="--w:40%"></i><b>60</b></div>
+              <div style="--i:5"><span>6ª</span><i style="--w:33.3%"></i><b>50</b></div>
+              <div style="--i:6"><span>7ª</span><i style="--w:26.6%"></i><b>40</b></div>
+              <div style="--i:7"><span>8ª</span><i style="--w:20%"></i><b>30</b></div>
+              <div style="--i:8"><span>9ª</span><i style="--w:13.3%"></i><b>20</b></div>
+              <div style="--i:9"><span>10ª</span><i style="--w:6.6%"></i><b>10</b></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <div class="step-icon"><i class="ph ph-target"></i></div>
+          <div>
+            <h3>Acerte e ganhe bônus</h3>
+            <p>Quanto mais seu voto bate com o resultado do grupo, mais pontos extras sua obra recebe. <b>Vote com critério.</b></p>
+          </div>
+        </article>
+
+        <article class="step reveal">
+          <div class="step-icon"><i class="ph ph-flag-checkered"></i></div>
+          <div>
+            <h3>Avance até a finalíssima</h3>
+            <p>As 10 obras mais pontuadas de cada grupo passam de fase. O funil se repete até restarem as <b>120 obras de elite</b>. Os pontos se somam do início ao fim.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="cats" aria-label="Categorias">
+    <div class="wrap cats-head reveal">
+      <h2>10 categorias.<br>Uma arena.</h2>
+      <p>Técnica livre, tema livre. Só não vale inteligência artificial para criar a obra.</p>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Arte Digital</span><span>Arte Urbana</span><span>Artesanato</span><span>Colagem</span><span>Desenho</span><span>Fotografia</span><span>Modelo</span><span>Pintura</span><span>Tatuagem</span><span>Lettering</span>
+      </div>
+      <div class="marquee-track">
+        <span>Arte Digital</span><span>Arte Urbana</span><span>Artesanato</span><span>Colagem</span><span>Desenho</span><span>Fotografia</span><span>Modelo</span><span>Pintura</span><span>Tatuagem</span><span>Lettering</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPEÕES -->
+  <section class="section" id="campeoes" style="padding-top:40px">
+    <div class="wrap">
+      <div class="champs-head reveal">
+        <span class="eyebrow"><i class="ph-fill ph-crown-simple"></i> Hall dos campeões</span>
+        <h2>Cinco batalhas.<br>Cinco nomes na história.</h2>
+      </div>
+
+      <div class="champs">
+        <article class="champ champ-featured reveal">
+          <div class="champ-img"><img src="https://golddenclick.com/vencedoresbat/quinto.jpg" alt="Ewerton Carlos" loading="lazy"></div>
+          <div class="champ-body">
+            <span class="champ-ed">Vencedor da 5ª Batalha</span>
+            <h3>Ewerton Carlos</h3>
+            <span class="period">Novembro de 2024 a abril de 2026</span>
+            <div class="champ-foot">
+              <span class="champ-prize">R$ 20.000</span>
+              <div class="champ-links">
+                <a class="icon-link" href="https://www.instagram.com/p/DXfVF7AEW0n/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="icon-link" href="https://golddenclick.com/perfil_aberto.php?usuario=ewerton" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+                <a class="icon-link" href="https://golddenclick.com/vencedoresbat/quinto_vencedor.pdf" target="_blank" rel="noopener" aria-label="Comprovante do prêmio"><i class="ph ph-receipt"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="champ reveal" style="--d:1">
+          <div class="champ-img"><img src="https://golddenclick.com/vencedoresbat/quarto.jpg" alt="Jhenivan Aguila" loading="lazy"></div>
+          <div class="champ-body">
+            <span class="champ-ed">4ª Batalha</span>
+            <h3>Jhenivan Aguila</h3>
+            <span class="period">Março a dezembro de 2024</span>
+            <div class="champ-foot">
+              <span class="champ-prize">R$ 20.000</span>
+              <div class="champ-links">
+                <a class="icon-link" href="https://www.instagram.com/p/DEP5F6Lub9o/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="icon-link" href="https://golddenclick.com/perfil_aberto.php?usuario=jhenivanaguila" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="champ reveal" style="--d:2">
+          <div class="champ-img"><img src="https://golddenclick.com/vencedoresbat/terceiro.jpg" alt="Mauro Nunes" loading="lazy"></div>
+          <div class="champ-body">
+            <span class="champ-ed">3ª Batalha</span>
+            <h3>Mauro Nunes</h3>
+            <span class="period">Março a dezembro de 2023</span>
+            <div class="champ-foot">
+              <span class="champ-prize">R$ 20.000</span>
+              <div class="champ-links">
+                <a class="icon-link" href="https://www.instagram.com/p/C1IS-8lOTRS/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="icon-link" href="https://golddenclick.com/perfil_aberto.php?usuario=mauronunes" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="champ reveal" style="--d:1">
+          <div class="champ-img"><img src="https://golddenclick.com/vencedoresbat/segundo.jpg" alt="Guilherme Guimarães" loading="lazy"></div>
+          <div class="champ-body">
+            <span class="champ-ed">2ª Batalha</span>
+            <h3>Guilherme Guimarães</h3>
+            <span class="period">Maio a dezembro de 2022</span>
+            <div class="champ-foot">
+              <span class="champ-prize">R$ 10.000</span>
+              <div class="champ-links">
+                <a class="icon-link" href="https://www.instagram.com/p/CqldhwnuUKh/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="icon-link" href="https://golddenclick.com/perfil_aberto.php?usuario=guiguimaraes" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="champ reveal" style="--d:2">
+          <div class="champ-img"><img src="https://golddenclick.com/vencedoresbat/primeiro.jpg" alt="Felipe Agnello" loading="lazy"></div>
+          <div class="champ-body">
+            <span class="champ-ed">1ª Batalha</span>
+            <h3>Felipe Agnello</h3>
+            <span class="period">Setembro de 2021 a maio de 2022</span>
+            <div class="champ-foot">
+              <span class="champ-prize">R$ 10.000</span>
+              <div class="champ-links">
+                <a class="icon-link" href="https://www.instagram.com/p/CdWhBUvO-3u/" target="_blank" rel="noopener" aria-label="Publicação no Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a class="icon-link" href="https://golddenclick.com/perfil_aberto.php?usuario=fegnello" target="_blank" rel="noopener" aria-label="Perfil na Golddenclick"><i class="ph ph-user"></i></a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- JUSTIÇA -->
+  <section class="section" style="padding-top:24px" aria-labelledby="justa">
+    <div class="wrap">
+      <h2 id="justa" class="reveal">A disputa mais justa<br>para o seu talento.</h2>
+      <div class="fair">
+        <div class="pill-card a reveal">
+          <div class="zero">0 pts</div>
+          <h3>Marco zero para todos</h3>
+          <p>Veterano ou estreante, todo inscrito começa a batalha com zero pontos. Cada edição é um evento isolado.</p>
+        </div>
+        <div class="pill-card b reveal" style="--d:1">
+          <i class="ph ph-globe-hemisphere-west"></i>
+          <h3>100% online</h3>
+          <p>Sem envio físico, sem deslocamento. Artistas de qualquer lugar do mundo participam nas mesmas condições.</p>
+        </div>
+        <div class="pill-card c reveal">
+          <i class="ph ph-hand-palm"></i>
+          <h3>Feito à mão, não por IA</h3>
+          <p>IA só como referência. A organização pode pedir arquivos originais, RAW ou vídeo do processo para comprovar autoria.</p>
+        </div>
+        <div class="pill-card d reveal" style="--d:1">
+          <i class="ph ph-seal-check"></i>
+          <h3>Selos não valem nota</h3>
+          <p>Super, Mega, Ultra e Supremo Patrocinador reconhecem sua trajetória. Na votação, só contam a obra e sua precisão como jurado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSCRIÇÃO -->
+  <section class="section pricing" id="inscricao">
+    <div class="wrap">
+      <div class="pricing-top reveal">
+        <span class="eyebrow"><i class="ph-fill ph-ticket"></i> Inscrição</span>
+        <h2>Quanto mais você batalha,<br>menos você paga.</h2>
+        <label id="histLabel">Quantas batalhas você já disputou?</label>
+        <div class="seg" role="group" aria-labelledby="histLabel" id="seg">
+          <button aria-pressed="true" data-k="novo">Primeira vez</button>
+          <button aria-pressed="false" data-k="antigas">1 batalha (1ª a 4ª)</button>
+          <button aria-pressed="false" data-k="ultima">1 batalha (a 5ª)</button>
+          <button aria-pressed="false" data-k="duas">2 batalhas</button>
+          <button aria-pressed="false" data-k="tres">3 batalhas</button>
+          <button aria-pressed="false" data-k="quatro">4 ou mais</button>
+        </div>
+      </div>
+
+      <div class="packs" id="packs"></div>
+
+      <div class="pay">
+        <span><i class="ph ph-qr-code"></i> PIX</span>
+        <span><i class="ph ph-paypal-logo"></i> PayPal</span>
+        <span><i class="ph ph-wallet"></i> Saldo interno</span>
+        <span><i class="ph ph-arrow-counter-clockwise"></i> Estorno em até 7 dias após a compra</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="duvidas">
+    <div class="wrap faq-grid">
+      <div class="reveal">
+        <h2>Dúvidas<br>frequentes.</h2>
+        <p class="lead">Resumo do edital da 6ª Batalha. O texto completo está em Termos, Políticas e Regras.</p>
+        <a class="faq-support" href="https://wa.me/5511978855684" target="_blank" rel="noopener">
+          <i class="ph ph-whatsapp-logo"></i>
+          <span>Suporte pelo WhatsApp<small>+55 11 97885-5684</small></span>
+        </a>
+      </div>
+      <div class="reveal" style="--d:1">
+        <details open>
+          <summary>Quem pode participar? <i class="ph ph-plus"></i></summary>
+          <p>Qualquer pessoa, de qualquer lugar. Menores de 18 anos participam com autorização do responsável legal.</p>
+        </details>
+        <details>
+          <summary>Até quando posso enviar minhas obras? <i class="ph ph-plus"></i></summary>
+          <p>Até 05 de novembro de 2026, às 23:59 (horário de Brasília). Você pode enviar uma de cada vez, em dias diferentes, e editar título, link e descrição até o prazo.</p>
+        </details>
+        <details>
+          <summary>Qual formato de arquivo é aceito? <i class="ph ph-plus"></i></summary>
+          <p>Arquivo .jpg com largura e altura mínimas de 1.000 pixels e tamanho máximo de 10 MB. Depois de enviada, a imagem não pode ser trocada.</p>
+        </details>
+        <details>
+          <summary>Posso usar inteligência artificial? <i class="ph ph-plus"></i></summary>
+          <p>Só como referência ou inspiração. A execução da obra precisa ser 100% sua. Filtros, edição e ampliação são permitidos.</p>
+        </details>
+        <details>
+          <summary>Paguei por 5 obras e enviei 2. E agora? <i class="ph ph-plus"></i></summary>
+          <p>Você compete normalmente com as obras enviadas. Não há reembolso das obras não enviadas. Se nenhuma for enviada até o prazo, a inscrição é cancelada sem reembolso.</p>
+        </details>
+        <details>
+          <summary>Minha obra continua sendo minha? <i class="ph ph-plus"></i></summary>
+          <p>Sim. Os direitos autorais e comerciais continuam 100% seus. A Golddenclick só pode exibir a obra, com crédito, para divulgar o concurso.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="final">
+    <div class="wrap">
+      <div class="final-box reveal">
+        <span class="final-mark" aria-hidden="true">G</span>
+        <div>
+          <h2>Que a força e a sabedoria estejam com você, guerreiro.</h2>
+          <p>Crie, envie, vote. A glória eterna da 6ª Batalha ainda não tem dono.</p>
+        </div>
+        <a href="cadastro.html" class="btn btn-gold">Quero batalhar <i class="ph-bold ph-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="wordmark">Gold<span>den</span>click</span>
+        <p>Concurso cultural de artes visuais realizado exclusivamente online.</p>
+      </div>
+      <div>
+        <h4>Batalha</h4>
+        <ul>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#premios">Prêmios</a></li>
+          <li><a href="#campeoes">Campeões</a></li>
+          <li><a href="#inscricao">Inscrição</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Regras</h4>
+        <ul>
+          <li><a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Edital de inscrição</a></li>
+          <li><a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Termos de uso</a></li>
+          <li><a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Regras da comunidade</a></li>
+          <li><a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Política de dados</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Conta</h4>
+        <ul>
+          <li><a href="cadastro.html">Criar conta</a></li>
+          <li><a href="#" data-open-login>Entrar</a></li>
+          <li><a href="https://golddenclick.com/recuperarsenha.php" target="_blank" rel="noopener">Esqueci a senha</a></li>
+          <li><a href="https://wa.me/5511978855684" target="_blank" rel="noopener">Suporte</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Golddenclick Assessoria e Serviços Digitais LTDA. CNPJ 42.603.718/0001-12</span>
+      <div class="lang" role="group" aria-label="Idioma">
+        <button aria-pressed="true">PT</button>
+        <button aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE -->
+<div class="cookie" id="cookie" role="region" aria-label="Aviso de cookies">
+  <span>Usamos apenas cookies essenciais para sua segurança e login. <a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Saiba mais</a></span>
+  <button class="btn btn-ghost btn-sm" id="cookieOk">Entendi</button>
+</div>
+
+<!-- LOGIN -->
+<dialog class="login" id="login" aria-labelledby="loginTitle">
+  <form class="login-inner" id="loginForm" novalidate>
+    <div class="login-head">
+      <span class="wordmark">Gold<span>den</span>click</span>
+      <button type="button" class="close-btn" id="loginClose" aria-label="Fechar"><i class="ph ph-x"></i></button>
+    </div>
+    <h3 id="loginTitle">Bem-vindo de volta.</h3>
+    <p class="sub">Entre para enviar suas obras e votar.</p>
+    <div class="field">
+      <label for="lu">Usuário</label>
+      <input class="input" id="lu" name="usuario" autocomplete="username" required>
+      <span class="err">Informe seu usuário.</span>
+    </div>
+    <div class="field">
+      <label for="lp">Senha</label>
+      <div class="input-wrap">
+        <input class="input" id="lp" name="senha" type="password" autocomplete="current-password" required>
+        <button type="button" class="eye" data-eye="lp" aria-label="Mostrar senha"><i class="ph ph-eye"></i></button>
+      </div>
+      <span class="err">Informe sua senha.</span>
+    </div>
+    <div class="row-between">
+      <label class="check"><input type="checkbox" name="lembrar"> Mantenha-me conectado</label>
+      <a href="https://golddenclick.com/recuperarsenha.php" target="_blank" rel="noopener">Esqueceu a senha?</a>
+    </div>
+    <button class="btn btn-gold" style="width:100%" type="submit">Entrar</button>
+    <p class="sub" style="text-align:center;margin:18px 0 0">Não tem conta? <a href="cadastro.html" style="color:var(--gold)">Crie a sua</a></p>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

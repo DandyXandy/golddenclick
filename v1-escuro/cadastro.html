@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Golddenclick | Cadastro</title>
+  <meta name="description" content="Crie sua conta na Golddenclick e garanta sua vaga na 6ª Batalha Artística.">
+  <meta name="theme-color" content="#0b0b0c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <style>
+    .signup { min-height: 100dvh; display: grid; grid-template-columns: .9fr 1.1fr; }
+    .signup-side {
+      position: sticky; top: 0; height: 100dvh;
+      padding: 32px 48px 40px;
+      display: flex; flex-direction: column;
+      background:
+        linear-gradient(180deg, rgb(11 11 12 / .2), rgb(11 11 12 / .92) 70%),
+        url("https://golddenclick.com/vencedoresbat/quinto.jpg") center 20% / cover no-repeat;
+      border-right: 1px solid var(--line);
+    }
+    .signup-side .back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: .92rem; margin-top: 28px; }
+    .signup-side .back:hover { color: var(--text); }
+    .side-copy { margin-top: auto; }
+    .side-copy h1 { font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 900; font-stretch: 115%; line-height: .98; letter-spacing: -.04em; }
+    .side-copy h1 em { font-style: normal; color: var(--gold); }
+    .journey { margin-top: 32px; display: grid; gap: 4px; }
+    .journey div { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: center; padding: 10px 0; }
+    .journey i { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / .06); border: 1px solid var(--line-2); font-size: 1rem; }
+    .journey .now i { background: var(--gold); color: var(--on-gold); border-color: var(--gold); }
+    .journey span { color: var(--muted); }
+    .journey .now span { color: var(--text); font-weight: 600; }
+
+    .signup-main { padding: 48px 24px 80px; display: flex; justify-content: center; }
+    .form-box { width: 100%; max-width: 520px; }
+    .form-box h2 { font-size: clamp(1.9rem, 3vw, 2.5rem); }
+    .form-box .lead { margin-top: 10px; font-size: 1rem; }
+    .notice {
+      margin: 28px 0 32px; padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--gold-soft);
+      border: 1px solid rgb(233 183 41 / .28);
+      display: grid; grid-template-columns: 24px 1fr; gap: 12px;
+      font-size: .9rem; color: #e8e1cf;
+    }
+    .notice i { color: var(--gold); font-size: 1.3rem; }
+    .notice b { color: var(--text); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+    .check-btn { height: 50px; padding: 0 18px; border-radius: var(--r-input); flex-shrink: 0; }
+    .ig-prefix { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    .with-prefix { padding-left: 34px; }
+    .tip { position: relative; }
+    .tip-body {
+      display: none; position: absolute; left: 0; top: calc(100% + 8px); z-index: 5;
+      width: min(320px, 80vw); padding: 14px 16px; border-radius: 14px;
+      background: var(--surface-2); border: 1px solid var(--line-2);
+      font-size: .84rem; color: var(--muted); font-weight: 400;
+      box-shadow: 0 20px 40px -12px rgb(0 0 0 / .8);
+    }
+    .tip:hover .tip-body, .tip:focus-within .tip-body { display: block; }
+    .tip button { background: none; border: 0; color: var(--gold); cursor: pointer; padding: 0; font-size: .88rem; text-decoration: underline; text-underline-offset: 3px; }
+    .strength { display: flex; gap: 4px; margin-top: 2px; }
+    .strength i { flex: 1; height: 4px; border-radius: 4px; background: rgb(255 255 255 / .08); transition: background .3s; }
+    .strength[data-s="1"] i:nth-child(-n+1) { background: var(--danger); }
+    .strength[data-s="2"] i:nth-child(-n+2) { background: #f0a24b; }
+    .strength[data-s="3"] i:nth-child(-n+3) { background: var(--gold); }
+    .strength[data-s="4"] i { background: var(--ok); }
+    .submit { width: 100%; margin-top: 8px; }
+    .login-line { text-align: center; margin-top: 22px; color: var(--muted); font-size: .94rem; }
+    .login-line a { color: var(--gold); }
+    .success { display: none; text-align: left; }
+    .success.show { display: block; animation: fadeUp .6s var(--ease); }
+    .success .big { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--on-gold); font-size: 2rem; margin-bottom: 24px; }
+    .success p { color: var(--muted); margin: 14px 0 28px; max-width: 44ch; }
+    .spin { display: inline-block; animation: rot .8s linear infinite; }
+    @keyframes rot { to { transform: rotate(360deg); } }
+
+    @media (max-width: 900px) {
+      .signup { grid-template-columns: 1fr; }
+      .signup-side { position: relative; height: auto; min-height: 420px; padding: 20px 16px 28px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .journey { display: none; }
+      .signup-main { padding: 36px 16px 64px; }
+    }
+    @media (max-width: 520px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="signup">
+  <aside class="signup-side">
+    <a href="index.html" class="wordmark" style="font-size:1.7rem">Gold<span>den</span>click</a>
+    <a href="index.html" class="back"><i class="ph ph-arrow-left"></i> Voltar ao início</a>
+    <div class="side-copy">
+      <h1>Garanta sua vaga na <em>6ª Batalha.</em></h1>
+      <div class="journey">
+        <div class="now"><i class="ph-bold ph-user-plus"></i><span>Crie sua conta</span></div>
+        <div><i class="ph ph-ticket"></i><span>Escolha de 1 a 5 obras e pague a inscrição</span></div>
+        <div><i class="ph ph-upload-simple"></i><span>Envie suas obras até 05/11/2026</span></div>
+        <div><i class="ph ph-trophy"></i><span>Vote, avance e dispute R$ 20.000</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="signup-main">
+    <div class="form-box">
+      <form id="signup" novalidate>
+        <h2>Crie sua conta.</h2>
+        <p class="lead">Leva menos de dois minutos. Todos os campos são obrigatórios.</p>
+
+        <div class="notice" role="note">
+          <i class="ph-fill ph-shield-check"></i>
+          <span><b>Não pedimos sua senha do Instagram nem do seu e-mail.</b> Crie uma senha nova, exclusiva para a Golddenclick.</span>
+        </div>
+
+        <div class="field" id="f-user">
+          <label for="usuario">Usuário <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input class="input" id="usuario" name="usuario" autocomplete="username" placeholder="Ex.: joanapinta">
+            <button type="button" class="btn btn-ghost check-btn" id="checkUser">Checar</button>
+          </div>
+          <span class="help">Nome + sobrenome, nome artístico ou apelido. Sem espaços.</span>
+          <span class="err" id="userErr">Escolha um usuário com pelo menos 3 caracteres, sem espaços.</span>
+          <span class="ok-msg"><i class="ph-bold ph-check"></i> Usuário disponível.</span>
+        </div>
+
+        <div class="field">
+          <label for="nome">Nome completo <span class="req">*</span></label>
+          <input class="input" id="nome" name="nome" autocomplete="name">
+          <span class="err">Informe seu nome e sobrenome.</span>
+        </div>
+
+        <div class="field">
+          <label for="instagram" class="tip">Instagram <span class="req">*</span>
+            <button type="button" aria-describedby="igTip">Por que pedimos?</button>
+            <span class="tip-body" id="igTip" role="tooltip">O edital exige portfólio público durante o concurso. Usamos seu perfil para dar crédito às suas obras e confirmar sua trajetória.</span>
+          </label>
+          <div class="input-wrap">
+            <span class="ig-prefix">@</span>
+            <input class="input with-prefix" id="instagram" name="instagram" placeholder="seuperfil">
+          </div>
+          <span class="err">Informe seu @ do Instagram.</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="celular">Celular <span class="req">*</span></label>
+            <input class="input" id="celular" name="celular" type="tel" inputmode="tel" autocomplete="tel" placeholder="+55 11 99999-9999">
+            <span class="err">Informe um celular com DDD.</span>
+          </div>
+          <div class="field">
+            <label for="email">E-mail <span class="req">*</span></label>
+            <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="voce@email.com">
+            <span class="err">Informe um e-mail válido.</span>
+          </div>
+        </div>
+
+        <div class="field" id="f-pass">
+          <label for="senha">Senha <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input class="input" id="senha" name="senha" type="password" autocomplete="new-password">
+            <button type="button" class="eye" data-eye="senha" aria-label="Mostrar senha"><i class="ph ph-eye"></i></button>
+          </div>
+          <div class="strength" id="strength" data-s="0" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <span class="help">Mínimo de 8 caracteres. Misture letras, números e símbolos.</span>
+          <span class="err">A senha precisa ter pelo menos 8 caracteres.</span>
+        </div>
+
+        <div class="field">
+          <label for="senha2">Confirmar senha <span class="req">*</span></label>
+          <div class="input-wrap">
+            <input class="input" id="senha2" name="confirmar_senha" type="password" autocomplete="new-password">
+            <button type="button" class="eye" data-eye="senha2" aria-label="Mostrar senha"><i class="ph ph-eye"></i></button>
+          </div>
+          <span class="err">As senhas não são iguais.</span>
+        </div>
+
+        <div class="field" id="f-terms">
+          <label class="check"><input type="checkbox" id="termos" name="termos"> <span>Li e concordo com todos os <a href="https://golddenclick.com/termospoliticaseregras.php" target="_blank" rel="noopener">Termos, Políticas e Regras</a> da Golddenclick.</span></label>
+          <span class="err">Você precisa aceitar os termos para continuar.</span>
+        </div>
+
+        <button type="submit" class="btn btn-gold submit" id="submitBtn">Cadastrar <i class="ph-bold ph-arrow-right"></i></button>
+        <p class="login-line">Já tem conta? <a href="index.html">Entrar</a></p>
+      </form>
+
+      <div class="success" id="success" role="status">
+        <div class="big"><i class="ph-bold ph-check"></i></div>
+        <h2>Conta criada, guerreiro.</h2>
+        <p>Próximo passo: escolha quantas obras vai inscrever e garanta sua vaga antes de 05 de novembro.</p>
+        <a href="index.html#inscricao" class="btn btn-gold">Escolher inscrição <i class="ph-bold ph-arrow-right"></i></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const form = $("#signup");
+  const setState = (input, bad) => {
+    const f = input.closest(".field");
+    f.classList.toggle("error", bad);
+    if (bad) f.classList.remove("ok");
+    return !bad;
+  };
+
+  /* Usuário: checagem simulada de disponibilidade */
+  const user = $("#usuario");
+  const userValid = () => /^[a-zA-Z0-9._-]{3,}$/.test(user.value.trim());
+  $("#checkUser").addEventListener("click", () => {
+    const f = $("#f-user");
+    f.classList.remove("ok");
+    if (!setState(user, !userValid())) return;
+    const btn = $("#checkUser");
+    btn.innerHTML = '<i class="ph ph-circle-notch spin"></i>';
+    setTimeout(() => {
+      btn.textContent = "Checar";
+      const taken = ["ewerton", "fegnello", "mauronunes", "guiguimaraes", "jhenivanaguila"].includes(user.value.trim().toLowerCase());
+      if (taken) {
+        $("#userErr").textContent = "Esse usuário já existe. Tente outro.";
+        f.classList.add("error");
+      } else {
+        f.classList.add("ok");
+      }
+    }, 700);
+  });
+  user.addEventListener("input", () => {
+    $("#f-user").classList.remove("ok", "error");
+    $("#userErr").textContent = "Escolha um usuário com pelo menos 3 caracteres, sem espaços.";
+  });
+
+  /* Máscara simples de celular */
+  $("#celular").addEventListener("input", (e) => {
+    let d = e.target.value.replace(/\D/g, "").slice(0, 13);
+    if (!d.startsWith("55") && d.length > 0) d = "55" + d;
+    d = d.slice(0, 13);
+    let out = "+" + d.slice(0, 2);
+    if (d.length > 2) out += " " + d.slice(2, 4);
+    if (d.length > 4) out += " " + d.slice(4, 9);
+    if (d.length > 9) out += "-" + d.slice(9);
+    e.target.value = d ? out : "";
+  });
+
+  /* Força da senha */
+  $("#senha").addEventListener("input", (e) => {
+    const v = e.target.value;
+    let s = 0;
+    if (v.length >= 8) s++;
+    if (/[A-Z]/.test(v) && /[a-z]/.test(v)) s++;
+    if (/\d/.test(v)) s++;
+    if (/[^A-Za-z0-9]/.test(v)) s++;
+    $("#strength").dataset.s = v ? Math.max(1, s) : 0;
+  });
+
+  /* Mostrar senha */
+  document.querySelectorAll("[data-eye]").forEach((b) => b.addEventListener("click", () => {
+    const inp = document.getElementById(b.dataset.eye);
+    const show = inp.type === "password";
+    inp.type = show ? "text" : "password";
+    b.innerHTML = `<i class="ph ph-eye${show ? "-slash" : ""}"></i>`;
+  }));
+
+  /* Limpa erro ao digitar */
+  form.querySelectorAll(".input").forEach((i) => i.addEventListener("input", () => {
+    if (i.id !== "usuario") i.closest(".field").classList.remove("error");
+  }));
+  $("#termos").addEventListener("change", () => $("#f-terms").classList.remove("error"));
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ok = [
+      setState(user, !userValid()),
+      setState($("#nome"), $("#nome").value.trim().split(/\s+/).length < 2),
+      setState($("#instagram"), $("#instagram").value.trim().replace("@", "").length < 2),
+      setState($("#celular"), $("#celular").value.replace(/\D/g, "").length < 12),
+      setState($("#email"), !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#email").value.trim())),
+      setState($("#senha"), $("#senha").value.length < 8),
+      setState($("#senha2"), !$("#senha2").value || $("#senha2").value !== $("#senha").value),
+    ];
+    const terms = $("#termos").checked;
+    $("#f-terms").classList.toggle("error", !terms);
+    if (ok.includes(false) || !terms) {
+      form.querySelector(".field.error .input, .field.error input")?.focus();
+      return;
+    }
+    const btn = $("#submitBtn");
+    btn.innerHTML = '<i class="ph ph-circle-notch spin"></i> Criando conta...';
+    btn.disabled = true;
+    setTimeout(() => {
+      form.style.display = "none";
+      $("#success").classList.add("show");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 1100);
+  });
+})();
+</script>
+</body>
+</html>
